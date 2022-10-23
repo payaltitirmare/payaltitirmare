@@ -1,10 +1,10 @@
-package com.codeo.first;
+package com.codeo.CodingPractice;
 
-public class Hello {
+public class GenerateSeries {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-System.out.println("hello world");
+
 	}
 
 }
