@@ -96,9 +96,9 @@
                                                     <td> <%=rs.getString("user_emailid") %> </td>
                                                     <td> <%= rs.getString("user_pass") %></td>
                                                    
-                                             <td> <a href="Registration?action=DELETE&id=<%=rs.getString("user_id")%>"><i class="ft-trash font-medium-3 red"></i></a></td>
+                                             <td> <a href="Registration?action=DELETE&id=<%=rs.getString("user_id")%>"><i class="ft-trash font-medium-3 red"></i></a>||
                                                   
-                                            <td><a href="Registration?action=EDIT&id=<%=rs.getString("user_id")%>" ><i class="ft-edit orange"></i></a> </td>
+                                           <a href="Registration?action=EDIT&id=<%=rs.getString("user_id")%>" ><i class="ft-edit orange"></i></a> </td>
                                                 </tr>
                                               <%
                                                  }

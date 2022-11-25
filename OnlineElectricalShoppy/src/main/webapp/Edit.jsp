@@ -25,7 +25,6 @@ int id = Integer.parseInt(request.getParameter("id"));
 userDAO.edituser(id);
 
 
-
 %>
 </body>
 </html>
