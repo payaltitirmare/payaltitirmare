@@ -13,9 +13,5 @@ public interface UserDAO {
 
 	public boolean deleteUser(int id) throws SQLException;
 
-	public User editUser(int id);
-
-	public boolean updateUser(User user);
-	
 	
 }

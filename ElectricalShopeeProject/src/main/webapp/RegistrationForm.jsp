@@ -27,10 +27,6 @@
 					<div class="signup-form">
 						<h2 class="form-title"> REGISTER </h2>
 					
-						<ul class="navbar-nav">
-				<li><a href="<%=request.getContextPath()%>/list"
-					class="nav-link">Users</a></li>
-			</ul>
 					
 		<c:if test="${user != null}">
 						<form action="update" method="post" class="register-form"  id="register-form">
@@ -45,30 +41,29 @@
 				
 				<c:if test="${user == null }">  Add New User </c:if> 
 				
-				
 						<div class="form-group">
 								<label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-								<input type="hidden" name="id" id="re_pass"  value='<c:out value="${user.id}"></c:out> ' />
+								<input type="hidden" name="id" id="re_pass"  value="<c:out value="${user.user_id}"></c:out>"/>
 							</div>
 							<div class="form-group">
 								<label for="name"> <i class="zmdi zmdi-account material-icons-name"></i></label> <input
-									type="text" name="name" id="name" placeholder="Your Name" value="<c:out value='${user.uName }'></c:out>"/>
+									type="text" name="name" id="name" placeholder="Your Name" value="<c:out value='${user.user_name }'></c:out>"/>
 							</div>
 							<div class="form-group">
 								<label for="contact"><i class="zmdi zmdi-lock-outline"></i></label>
-							<input type="text" name="contact" id="contact" placeholder="Mobile No" value="<c:out value='${user.uMobileno }'></c:out>" />
+							<input type="text" name="contact" id="contact" placeholder="Mobile No" value="<c:out value='${user.user_mobno }'></c:out>" />
 							</div>
 							<div class="form-group">
 								<label for="Address"><i class="zmdi zmdi-lock-outline"></i></label>
-								<input type="text" name="Address" id="Address" placeholder="Address" value="<c:out value='${user.uAddress }'></c:out>" />
+								<input type="text" name="Address" id="Address" placeholder="Address" value="<c:out value='${user.user_adderess }'></c:out>" />
 							</div>
 							<div class="form-group">
 								<label for="email"><i class="zmdi zmdi-email"></i></label> <input
-									type="email" name="email" id="email" placeholder="Your Email" value="<c:out value='${user.uEmail }'></c:out>" />
+									type="email" name="email" id="email" placeholder="Your Email" value="<c:out value='${user.user_emailid }'></c:out>" />
 							</div>
 							<div class="form-group">
 								<label for="pass"><i class="zmdi zmdi-lock"></i></label> <input
-									type="password" name="pass" id="pass" placeholder="Password"  value="<c:out value='${user.uPassword }'></c:out>" />
+									type="password" name="pass" id="pass" placeholder="Password"  value="<c:out value='${user.user_pass }'></c:out>" />
 							</div>
 							<div class="form-group">
 								<label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>

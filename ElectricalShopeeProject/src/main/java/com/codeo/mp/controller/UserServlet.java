@@ -74,6 +74,14 @@ public class UserServlet extends HttpServlet {
 			break;
      }
 		}
+	private void updateUser(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("update");
+	}
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("edit form");
+	}
 	private void listUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		List<User> listUser = userDAO.selectAllUsers();
@@ -88,28 +96,7 @@ public class UserServlet extends HttpServlet {
 		userDAO.deleteUser(id);
 		response.sendRedirect("list");
 		}
-	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int id = Integer.parseInt(request.getParameter("id"));
-		User existingdata = userDAO.editUser (id);
-		request.setAttribute("user", existingdata);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("RegistrationForm.jsp");
-		dispatcher.forward(request, response);
-	}
-	private void updateUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	
-		int id = Integer.parseInt(request.getParameter("id"));
-		 uName = request.getParameter("name");
-		uMobileno = request.getParameter("contact");
-		uAddress = request.getParameter("Address");
-		uEmail = request.getParameter("email");
-		uPassword = request.getParameter("pass");
-			
-		User user =new User(id ,uName , uMobileno, uAddress,uEmail, uPassword);
-		userDAO.updateUser(user);
-	   response.sendRedirect("list");
-	}
-	private void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		private void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		        uName = request.getParameter("name");
 				uMobileno = request.getParameter("contact");

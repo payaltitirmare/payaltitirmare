@@ -68,7 +68,7 @@ public class ProductDaoImp implements ProductDao {
 		return flag;
 	}
 
-	@Override         //insert product ----------------
+	   //insert product ----------------
 	
 	public List<Product> getlist(){
 	

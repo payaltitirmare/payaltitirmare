@@ -78,17 +78,17 @@
                                       
                                 </tr>
                             </thead>
-                            
-  					<c:forEach var="user" items="${listUser}">
+                           
+                           	<c:forEach var="user" items="${listUser}">
 			<tr>
-			               <td><c:out value="${user.id}"></c:out></td>
-							<td><c:out value="${user.uName}"> </c:out></td>
-							<td><c:out value="${user.uMobileno}"></c:out></td>
-							<td><c:out value="${user.uAddress}"></c:out></td>
-							<td><c:out value="${user.uEmail}" ></c:out></td>
-							<td><c:out value="${user.uPassword}" ></c:out></td>
-							<td><a href="edit?id=<c:out value='${user.id}'/>">Edit</a>	
-							 <a href="delete?id=<c:out value='${user.id}'/>">Delete</a></td>
+			               <td><c:out value="${user.user_id}"></c:out></td>
+							<td><c:out value="${user.user_name}"> </c:out></td>
+							<td><c:out value="${user.user_mobno}"></c:out></td>
+							<td><c:out value="${user.user_adderess}"></c:out></td>
+							<td><c:out value="${user.user_emailid}" ></c:out></td>
+							<td><c:out value="${user.user_pass}" ></c:out></td>
+							<td><a href="edit?id=<c:out value='${user.user_id}'/>">Edit</a>	
+							 <a href="delete?id=<c:out value='${user.user_id}'/>">Delete</a></td>
 		
 					<!--  <td><a  href="edit?id=<c:out value='${user.id}' />"><i class="ft-trash font-medium-3 red"></i></a> ||
                           

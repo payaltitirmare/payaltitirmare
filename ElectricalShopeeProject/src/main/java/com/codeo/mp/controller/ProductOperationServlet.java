@@ -93,7 +93,6 @@ public class ProductOperationServlet extends HttpServlet {
 		fos.write(data);
 		fos.close();
 		System.out.println(uploadFile);
-		
 		 product = new Product(prod_name ,prod_description, prod_price, prod_discount, prod_quantity, prod_imageName);
 		
 		  if(id.isEmpty() || id == null)
@@ -105,10 +104,12 @@ public class ProductOperationServlet extends HttpServlet {
 		 }
 		 else
 		 {
-			  product.setId(Integer.parseInt("id"));
+			  product.setId(Integer.parseInt(request.getParameter("id")));
 			 if(productdao.update(product))
 			 {
+				 
 	          request.setAttribute("NOTIFICATION", "product Updated Succefully"); 
+	          
 			 }
 		 }
 		  
@@ -131,7 +132,7 @@ public class ProductOperationServlet extends HttpServlet {
 		System.out.println("edit is:"+id);
 		Product theproduct = productdao.editProd(id);
 	    request.setAttribute("product", theproduct);
-		dispatcher = request.getRequestDispatcher("Add-product.jsp");
+		dispatcher = request.getRequestDispatcher("Update.jsp");
 		dispatcher.forward(request, response);
 	}
 

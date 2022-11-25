@@ -94,52 +94,6 @@ public class UserDAOImp implements UserDAO {
 	     return rowDeleted;
      }
 	
-	@Override
-	public User editUser(int id) {
-		User user = null;
-		con = DbUtil.getconnection();
-		PreparedStatement preparedstatement = null ;
-		
-		try {
-			preparedstatement= con.prepareStatement(EDIT_USER);
-	    	preparedstatement.setInt(1, id);
-			
-			ResultSet rs = preparedstatement.executeQuery();
-			while(rs.next())
-			{
-				String uName = rs.getString(2);
-				String uMobileno = rs.getString(3);
-				String uAddress = rs.getString(4);
-				String uEmail = rs.getString(5);
-				String uPassword = rs.getString(6);
-				user = new User(id, uName, uMobileno,uAddress, uEmail, uPassword);
-				}
-			} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return user;
-	}
-	@Override
-	public boolean updateUser(User user)  {
-		boolean rowUpdated= false;
-		con = DbUtil.getconnection();
-		PreparedStatement preparedstatement = null ;
-		
-		try {
-			preparedstatement = con.prepareStatement(UPDATE_USERS_SQL);
-			
-			preparedstatement.setString(1, user.getuName());
-			preparedstatement.setString(2, user.getuMobileno());
-			preparedstatement.setString(3, user.getuAddress());
-			preparedstatement.setString(4, user.getuEmail());
-			preparedstatement.setString(5, user.getuPassword());
-			preparedstatement.setInt(6, user.getId());
-			
-			 rowUpdated = preparedstatement.executeUpdate() >0 ;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rowUpdated;
-	}
+	
 	
 }
