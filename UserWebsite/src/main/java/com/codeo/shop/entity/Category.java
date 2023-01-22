@@ -15,7 +15,7 @@ public class Category {
 	}
 
 
-	public Category( String cat_title, String cat_description, int Id) {
+	public Category( int Id, String cat_description, String cat_title) {
 	      this.Id = Id;
 		this.Cat_title = cat_title;
 		this.cat_description = cat_description;
@@ -24,6 +24,14 @@ public class Category {
 
 	public Category() {
 		
+	}
+	public int getId() {
+		return Id;
+	}
+
+
+	public void setId(int id) {
+		Id = id;
 	}
 
 
@@ -45,5 +53,5 @@ public class Category {
 	public void setCat_description(String cat_description) {
 		this.cat_description = cat_description;
 	}
-	
+
 }

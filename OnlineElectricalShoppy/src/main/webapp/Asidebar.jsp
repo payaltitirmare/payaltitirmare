@@ -61,49 +61,6 @@
                    <li class=" nav-item"><a href="../documentation/index.html"><i class="ft-book"></i><span data-i18n="" class="menu-title">Customer</span></a>
               </li>
               
-              <li class="has-sub nav-item"><a href="#"><i class="ft-edit"></i><span data-i18n="" class="menu-title">Forms</span></a>
-                <ul class="menu-content">
-                  <li class="has-sub"><a href="#" class="menu-item">Elements</a>
-                    <ul class="menu-content">
-                      <li><a href="inputs.html" class="menu-item">Inputs</a>
-                      </li>
-                      <li><a href="input-groups.html" class="menu-item">Input Groups</a>
-                      </li>
-                      <li><a href="input-grid.html" class="menu-item">Input Grid</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="has-sub"><a href="#" class="menu-item">Layouts</a>
-                    <ul class="menu-content">
-                      <li><a href="basic-forms.html" class="menu-item">Basic Forms</a>
-                      </li>
-                      <li><a href="horizontal-forms.html" class="menu-item">Horizontal Forms</a>
-                      </li>
-                      <li><a href="hidden-labels.html" class="menu-item">Hidden Labels</a>
-                      </li>
-                      <li><a href="form-actions.html" class="menu-item">Form Actions</a>
-                      </li>
-                      <li><a href="bordered-forms.html" class="menu-item">Bordered Forms</a>
-                      </li>
-                      <li><a href="striped-rows.html" class="menu-item">Striped Rows</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a href="validation-forms.html" class="menu-item">Validation</a>
-                  </li>
-                  <li><a href="wizard-forms.html" class="menu-item">Wizard</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="has-sub nav-item"><a href="#"><i class="ft-grid"></i><span data-i18n="" class="menu-title">Tables</span></a>
-                <ul class="menu-content">
-                  <li><a href="regular-table.html" class="menu-item">Regular</a>
-                  </li>
-                  <li><a href="extended-table.html" class="menu-item">Extended</a>
-                  </li>
-                </ul>
-              </li>
-              
               <li class=" nav-item"><a href="calendar.html"><i class="ft-calendar"></i><span data-i18n="" class="menu-title">Calendar</span></a>
               </li>
             

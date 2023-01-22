@@ -22,8 +22,13 @@ public class Category {
 	}
 
 
-	public Category() {
-		
+	public int getId() {
+		return Id;
+	}
+
+
+	public void setId(int id) {
+		Id = id;
 	}
 
 
@@ -45,5 +50,12 @@ public class Category {
 	public void setCat_description(String cat_description) {
 		this.cat_description = cat_description;
 	}
+
+
+	public Category() {
+		
+	}
+
+
 	
 }

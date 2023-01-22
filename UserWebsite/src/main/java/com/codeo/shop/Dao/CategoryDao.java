@@ -18,7 +18,6 @@ private String List_Category = "select * from add_category"	;
 	Connection con = ConnectionProvider.getconnection();
 	Category category = null;
 	
-	//catId, catTitle, catDescriptor
 	public List<Category> getCategoryList() {
 		
 		// category = new Category();
@@ -33,11 +32,12 @@ private String List_Category = "select * from add_category"	;
 			
 			while(rs.next())
 			{
-				//int id = rs.getInt("id");
+				 //catId, catTitle, catDescriptor
+				int id = rs.getInt("catId");
 				String cat_title=rs.getString("catTitle");
 				String cat_description= rs.getString("catDescriptor");
 				
-				list.add(new Category(  cat_title,  cat_description)) ;
+				list.add(new Category( id, cat_title,  cat_description)) ;
 				
 				//System.out.println( cat_title+" "+ cat_description);
 		

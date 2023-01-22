@@ -29,15 +29,17 @@
 					<div class="signup-form">
 						<h2 class="form-title"> REGISTER </h2>
 					
-					<form action="Registration" method="post" class="register-form"  id="register-form">
+					<form action="Registration" method="post" class="register-form"  id="register-form" onclick="return myfunction()">
 				
 					<div class="form-group">
 								<label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-								<input type="hidden" name="id" id="re_pass" "/>
+								<input type="hidden" name="id" id="re_pass"/>
 							</div>
+							<!-- changes current -->
 							<div class="form-group">
 								<label for="name"> <i class="zmdi zmdi-account material-icons-name"></i></label> <input
 									type="text" name="name" id="name" placeholder="Your Name" />
+									<span id="uname"> </span>
 							</div>
 							<div class="form-group">
 								<label for="contact"><i class="zmdi zmdi-lock-outline"></i></label>
@@ -152,4 +154,18 @@
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="js/main.js"></script>
 
-</body>
+   <script>  
+   function myfunction()
+   {
+	   var name= document.getElementById("name").value;
+	  
+	   if(name ==""){
+		   document.getElementById("uname").innerHTML="***please enter your name";
+	   }
+	   
+	   
+   }
+   
+   
+   </script>
+ </body>

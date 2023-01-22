@@ -69,7 +69,7 @@
 							<div class="form-group form-button">
 								<input type="submit" name="signin" id="signin"
 									class="form-submit" value="Log in" />
-						<a href="registration.jsp" class="signup-image-link">Register</a>
+						<a href="RegistrationForm.jsp" class="signup-image-link">Register</a>
 							</div>
 						</form>
 						<div class="social-login">

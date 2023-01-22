@@ -150,8 +150,14 @@
                 </div>
             </div>
               <%
-                            CategoryDao categorydao = new CategoryDao(); 
-                            List<Category> list = categorydao.getCategoryList();
+                           // CategoryDao categorydao = new CategoryDao(); 
+                           // List<Category> list = categorydao.getCategoryList();
+                            
+                          // for(Category category :list)
+                         //  {
+                        	  // System.out.println("category id :"+category.getId()+"  "+category.getCat_title());
+                          // }
+                            
                             ProductDao productdao = new ProductDao();
                             List<Product> prodlist = productdao.getAllProducts();
                           
@@ -160,11 +166,11 @@
             <div class="row featured__filter">
                    
                      <%    for(Product product:prodlist)
-                    {   System.out.println(product.getProd_description()); %>
+                    {   //System.out.println(product.getProd_description()); %>
               <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
                    
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/<%=product.getProd_imageName() %>" style="background-image: url(&quot;img/featured/feature-1.jpg&quot;);">
+                        <div class="featured__item__pic set-bg" data-setbg="img/latest-product/<%=product.getProd_imageName() %>" style="background-image: url(&quot;img/featured/feature-1.jpg&quot;);">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -174,7 +180,7 @@
                     
                         <div class="featured__item__text">
                         <h5><%=product.getProd_name() %></h5>
-                            <h6><%=product.getProd_description() %></h6>
+                           <!--   <h5><%=product.getProd_description() %></h5> -->
                             <h5><%=product.getProd_price() %></h5>
                         </div>
                     </div>
@@ -183,22 +189,19 @@
               <%  } %> 
               
               </div>
-              
-        </div></section>
-        <!-- Featured Section End -->
-
-    <!-- Banner Begin -->
+              </div></section>
+  
     <div class="banner">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="img/banner/banner-1.jpg" alt="">
+                        <img src="img/banner/home.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="img/banner/banner-2.jpg" alt="">
+                        <img src="img/banner/lighthome.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -424,7 +427,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="img/blog/LED.jpg" alt="">
+                            <img src="img/banner/beaty.jpg" alt="">
                         </div>
                         <div class="blog__item__text">
                             <ul>
@@ -439,7 +442,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="img/blog/blog-2.jpg" alt="">
+                            <img src="img/banner/livingroom.jpg" alt="">
                         </div>
                         <div class="blog__item__text">
                             <ul>
@@ -454,7 +457,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="img/blog/blog-3.jpg" alt="">
+                            <img src="img/banner/home.jpg" alt="">
                         </div>
                         <div class="blog__item__text">
                             <ul>
@@ -481,8 +484,6 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-
-
 
 </body>
 
