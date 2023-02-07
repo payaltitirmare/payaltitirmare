@@ -9,6 +9,7 @@ public class Product {
 	private String prod_discount = null;
 	private String prod_quantity = null;
 	private String prod_imageName = null;
+	private int cid =0;
 	
 	public Product(String id, String prod_name, String prod_description, String prod_price, String prod_discount,
 			String prod_quantity, String prod_imageName) {
@@ -19,11 +20,12 @@ public class Product {
 		this.prod_price = prod_price;
 		this.prod_discount = prod_discount;
 		this.prod_quantity = prod_quantity;
-		this.prod_imageName = prod_imageName;
+		this.prod_imageName =prod_imageName;
+		
 	}
 	
-	public Product(String prod_name, String prod_description, String prod_price, String prod_discount,
-			String prod_quantity, String prod_imageName) {
+	 public Product(String prod_name, String prod_description, String prod_price, String prod_discount,
+			String prod_quantity, String prod_imageName,int cid) {
 		super();
 		this.prod_name = prod_name;
 		this.prod_description = prod_description;
@@ -31,10 +33,12 @@ public class Product {
 		this.prod_discount = prod_discount;
 		this.prod_quantity = prod_quantity;
 		this.prod_imageName = prod_imageName;
+		this.cid = cid;
 	}
   
 	public Product() {
 		
+		Category category = new Category();
 	}
 
 	public String getProd_name() {
@@ -73,8 +77,8 @@ public class Product {
 		return prod_quantity;
 	}
 
-	public void setProd_quantity(String prod_quantity) {
-		this.prod_quantity = prod_quantity;
+	public void setProd_quantity(String string) {
+		this.prod_quantity = string;
 	}
 
 	public String getProd_imageName() {
@@ -89,6 +93,14 @@ public class Product {
 		return id;
 	}
 
+	public int getCid() {
+		return cid;
+	}
+
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+	
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", prod_name=" + prod_name + ", prod_description=" + prod_description
@@ -99,6 +111,13 @@ public class Product {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+      // calculate price after discount 
+      //int disc = Integer.parseInt(this.getProd_discount());
+	public int getPriceAfterDiscount()
+	{
+		int d= (int)((Integer.parseInt(this.getProd_discount())/100.0)*Integer.parseInt(this.getProd_price()));
+		
+		return Integer.parseInt(this.getProd_price())-d;
 	
-}
+	     }
+	}

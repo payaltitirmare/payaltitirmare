@@ -1,48 +1,32 @@
 package com.codeo.shop.Dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.codeo.shop.dbutil.ConnectionProvider;
 import com.codeo.shop.entity.Product;
 
-public class ProductDao {
+public interface ProductDao {
 
-	private static final String selct_product ="SELECT * FROM product_operation ";
-	  
-	public List <Product> getAllProducts()
-	{
-		List<Product> list = new ArrayList<Product>();
-		Product product = null;
-Connection con = ConnectionProvider.getconnection();
-try {
-	Statement statement = con.createStatement();
-	ResultSet resultset =null;
+	public boolean addProduct(Product product);
+
+	public boolean update(Product product);
+
+	public List<Product> getAllProducts();
+
+	public boolean delete(int id);
+
+	//public Product editProd(int id);
 	
-	resultset =statement.executeQuery(selct_product);
+	public List getAllProductsById(int id);
 	
-	//prod_id, prod_name, prod_description, prod_price, prod_discount, prod_quantity, prod_imageName
-	while(resultset.next())
-	{
-		product = new Product();
-		product.setId(resultset.getInt("prod_id"));
-		product.setProd_name(resultset.getString("prod_name"));
-		product.setProd_description(resultset.getString("prod_description"));
-		product.setProd_price(resultset.getString("prod_price"));
-		product.setProd_discount(resultset.getString("prod_discount"));
-		product.setProd_imageName(resultset.getString("prod_imageName"));
+	public List  getAllProductsForDetails(int id);
+
+	public Product getProduct(int prod_id);
+
+	public List<Product> getlist();
+
+	public Product getProductById(int id);
+
 	
-		list.add(product);
-	}
-} 
-catch (SQLException e) {
-	e.printStackTrace();
-}
-	return list;
-		
-	}
+	
+	
 }
