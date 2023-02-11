@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.codeo.shop.dbutil.ConnectionProvider;
+import com.codeo.shop.entity.Cart;
 import com.codeo.shop.entity.Product;
 
 public class ProductDaoImp implements ProductDao {
@@ -18,9 +19,22 @@ public class ProductDaoImp implements ProductDao {
     private static final String Edit_product ="select * from product_operation where prod_id=?";
     //private static final String Update_product = "UPDATE product_operation SET name = '"+product.getProd_name()+"', "+ "description = '"+product.getProd_description()+"',  price = '"+product.getProd_price()+"', discount = '"+product.getProd_discount()+"',quantity = '"+product.getProd_quantity()+"',image = '"+product.getProd_imageName()+"' where id="+product.getId();
 	
+  
+    
 	Connection con = null;
     PreparedStatement preparedStatement  =null;
     Statement statement = null;
+    
+    public ProductDaoImp(Connection con)
+    {
+    	this.con=con;
+    	System.out.println("this is cunstructor con:"+this.con);
+    }
+    
+    public ProductDaoImp()
+    {
+    	
+    }
     
     //insert product ----------------
 	public boolean addProduct(Product product) {
@@ -329,4 +343,80 @@ public class ProductDaoImp implements ProductDao {
          
 		return listProduct;
 	 }
-  }
+	@Override
+	public List<Cart> getCartProducts(ArrayList<Cart> cartlist) {
+		
+		List<Cart> products=new ArrayList<Cart>();
+		Connection con = ConnectionProvider.getconnection();
+		   
+		try {
+			if(cartlist.size()>0) {
+				for(Cart item:cartlist) {
+					String query="SELECT * FROM product_operation where prod_id=?";
+					PreparedStatement psmt=con.prepareStatement(query);
+					psmt.setInt(1, item.getId());
+					ResultSet rs = psmt.executeQuery();
+					
+					while(rs.next()) {
+						
+						Product product =new Product();
+						product.setProd_price(rs.getString("prod_price"));
+						product.setProd_discount(rs.getString("prod_discount"));
+						System.out.println();
+						Cart row = new Cart();
+						row.setId(rs.getInt("prod_id"));
+						row.setProd_name(rs.getString("prod_name"));
+						row.setProd_imageName(rs.getString("prod_imageName"));
+						int calculated_price = product.getPriceAfterDiscount();
+						System.out.println(calculated_price);
+						System.out.println(item.getQuantity());
+						row.setcalculated_price(calculated_price * item.getQuantity());
+						products.add(row);
+					}
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return products;
+		
+	}
+	
+	public int getTotalCartPrice(ArrayList<Cart> cartlist)
+	{
+		int sum=0;
+		String query=null;
+		PreparedStatement psmt = null;
+		ResultSet rs =null;
+		
+		try {
+			if(cartlist.size()>0) {
+				for(Cart item:cartlist)
+				{
+					 query="select prod_price,prod_discount from product_operation where prod_id=?";
+					psmt=this.con.prepareStatement(query);
+					psmt.setInt(1, item.getId());
+					rs=psmt.executeQuery();
+					
+					while(rs.next())
+					{
+						int price=Integer.parseInt(rs.getString("prod_price"));
+						int discount = Integer.parseInt(rs.getString("prod_discount"));
+						int d=(int)((discount/100.0)*price);
+						sum= sum+(price-d)*item.getQuantity();
+					}
+					}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return sum;
+		}
+	
+	
+	
+	}

@@ -22,6 +22,12 @@
 		<description></description>
 		<servlet-class>com.codeo.shop.entity.Cart</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>QuantityIncDecServlet</servlet-name>
+		<display-name>QuantityIncDecServlet</display-name>
+		<description></description>
+		<servlet-class>com.codeo.shop.controller.QuantityIncDecServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/LogoutServlet</url-pattern>
@@ -33,5 +39,9 @@
 	<servlet-mapping>
 		<servlet-name>Cart</servlet-name>
 		<url-pattern>/Cart</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QuantityIncDecServlet</servlet-name>
+		<url-pattern>/QuantityIncDecServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
