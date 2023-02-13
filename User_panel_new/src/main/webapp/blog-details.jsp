@@ -31,7 +31,7 @@
 		<div class="loader"></div>
 	</div>
 
-	<jsp:include page="header.html" />
+	<jsp:include page="header.jsp" />
 
 	<!-- Hero Section Begin -->
 	<section class="hero hero-normal">

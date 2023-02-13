@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.codeo.shop.Dao.UserDAO;
 import com.codeo.shop.Dao.UserDaoImpl;
 import com.codeo.shop.entity.User;
@@ -44,12 +46,24 @@ public class RegistrationServlet extends HttpServlet {
 		 user_type = request.getParameter("user_type");
 		 user = new User(user_name, user_mobno, user_adderess, user_emailid,user_pass,user_type);	
 		 System.out.println(user_name+" "+user_mobno+" "+user_type);
-			
+		
+		 
 			if(id.isEmpty() || id==null)
 			{
 				if(userDAO.insertUser(user)) {
+					
+					HttpSession httpSession = request.getSession();
+					httpSession.setAttribute("message", "Registration Successful       ");
 					response.sendRedirect("loginfrom.jsp");
-		}
+					
+					
+					
+					
+		              }
+				else {
+					response.sendRedirect("RegistrationForm.jsp");
+
+				}
 			}else {
 				user.setId(Integer.parseInt(request.getParameter("id")));
 				if(userDAO.update(user))

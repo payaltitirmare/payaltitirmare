@@ -67,7 +67,7 @@ if(cart_list !=null)
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-   <jsp:include page="header.html" />
+   <jsp:include page="header.jsp" />
 
 	<!-- Hero Section Begin -->
 	<section class="hero hero-normal">
@@ -250,7 +250,6 @@ if(cart_list !=null)
   
 <script type="text/javascript">
 
-
 function incrementValue(id) {
 	  var value = parseInt(document.getElementById("number-" + id).value, 10);
 	  value = isNaN(value) ? 1 : value + 1;
@@ -273,6 +272,7 @@ function incrementValue(id) {
 	  AllTotalAmount();
 	}
 
+	
 	function AllTotalAmount() {
 	  total = 0;
 	  var totalPriceCells = document.querySelectorAll("[id^='totalPriceCell-']");
@@ -290,25 +290,24 @@ function incrementValue(id) {
     const productId = cartItem.querySelector("input[id^='number-']").id.split("-")[1];
     removeFromCart(productId);
     cartItem.remove();
+     });
   });
-});
 
-function removeFromCart(productId) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('DELETE', `/cart/${productId}`, true);
-  xhr.onreadystatechange = function() {
-	  if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-	    console.log(`Product with id ${productId} was removed from the cart.`);
-	    const totalPrice = xhr.response; // assuming that the response from the server is the updated total price
-	    document.querySelector('#total').textContent = `Total Price: \u20B9 ${totalPrice}`;
-	  }
-	};
+   function removeFromCart(productId) {
+	   const xhr = new XMLHttpRequest();
+	   xhr.open('DELETE', `/cart/${productId}`, true);
+	   xhr.onreadystatechange = function() {
+	     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+	       console.log(`Product with id ${productId} was removed from the cart.`);
+	       const totalPrice = xhr.response; // assuming that the response from the server is the updated total price
+	       document.querySelector('#total').textContent = `Total Price: \u20B9 ${totalPrice}`;
+	       AllTotalAmount();
+	     }
+	   };
 
-  xhr.send();
-}
+	   xhr.send();
+	 }
 
-    	
-	
 </script>
 
 

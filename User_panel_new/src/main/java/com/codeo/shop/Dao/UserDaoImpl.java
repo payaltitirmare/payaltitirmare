@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.codeo.shop.dbutil.ConnectionProvider;
 import com.codeo.shop.entity.User;
@@ -20,11 +21,13 @@ public class UserDaoImpl implements UserDAO {
     private static  final String UPDATE_USERS_SQL = "update user_registration set user_name = ?,user_mobno= ?, user_adderess =?,user_emailid =?,user_pass =? where user_id =?";
 	
 	Connection con = null;
+	PreparedStatement preparedstatement = null ;
+	
 	
 	public List<User> selectAllUsers() {
 		List<User> users = new ArrayList<>();
 		
-		PreparedStatement preparedstatement = null ;
+		
 	 	try {
 				preparedstatement= con.prepareStatement(SELECT_ALL_USERS);
 	            ResultSet resultset = preparedstatement.executeQuery();
@@ -45,6 +48,8 @@ public class UserDaoImpl implements UserDAO {
 			} 
 			return users;
 	}
+	
+	
 	
 	@Override
 	public boolean insertUser(User user) {
@@ -189,7 +194,29 @@ public class UserDaoImpl implements UserDAO {
             ResultSet rs = ps.executeQuery();
 		
             return rs;
+	
 	}
+	
+	public  static Map<String, Long> total_user() throws SQLException{
+		Connection con = null;
+		con = ConnectionProvider.getconnection();
+		
+		String count_query= "select Count(*) from user_registration";
+		 PreparedStatement ps;
+		
+			ps = con.prepareStatement(count_query);
+		
+		 ResultSet rs = ps.executeQuery();
+		 Long usercount = null;
+		 while(rs.next()) {
+			  usercount=rs.getLong(1);
+		 }
+		Map<String, Long>  map=new HashMap<String, Long>();
+		map.put("Total_User", usercount);
+		
+		return map;
+	}
+
 	}
 
 
@@ -251,5 +278,3 @@ public class UserDaoImpl implements UserDAO {
 		}   */
 	
 	//for login user and admin
-	
-	

@@ -1,3 +1,39 @@
+
+<%
+	 HttpSession session1=request.getSession();
+  String user_name=(String)session1.getAttribute("UserName");
+  String user_email=(String)session1.getAttribute("UserEmail");
+
+	//String user=(String)session1.getAttribute("usertype");
+	//String user_email=(String)session1.getAttribute("email");
+	//System.out.println("======================"+user_name+"===================="+ user_email +"==============================");
+	//String user_name=(String)session1.getAttribute("UserName");
+	//if(user==null){
+	//	
+	//	session.setAttribute("message", "You are not logged in, Logged in first as a admin");
+	//	response.sendRedirect("loginfrom.jsp");
+	//	return;
+	//}
+	//else if(user.equals("Admin")){
+	//	session.setAttribute("message", "You are not Normal User, Logged in first as a User");
+	//	response.sendRedirect("loginfrom.jsp");
+	//	return;
+	//}
+	
+	//else if(user.equals("Normal User")){
+		
+		
+	//}
+	
+	//else{
+	//	session.setAttribute("message", "Invalid User");
+	//	response.sendRedirect("loginfrom.jsp");
+	//	return;
+	//}
+	
+	%>
+
+
 <!DOCTYPE html>
 <html lang="zxx">
 <%@page import="java.util.*"%>
@@ -68,7 +104,7 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-	<jsp:include page="header.html" />
+	<jsp:include page="header.jsp" />
 	<!--  for product and category  -->
 
 	<!-- Hero Section Begin -->
@@ -111,11 +147,12 @@
 						</div>
 						<div class="hero__search__phone">
 							<div class="hero__search__phone__icon">
-								<i class="far fa-user-circle"></i>
+								<img  alt="icon" src="img/hero/icon.png"> 
 							</div>
 							<div class="hero__search__phone__text">
-								<h5>User_Name</h5>
-								<span>Your email is:</span>
+								<h5>WELCOME <%if(user_name!=null){%>  </h5>
+								<h4 class=" font-weight-bold" style="color: green"> <%=user_name.toUpperCase() %> </h4>
+								<%} %>
 							</div>
 						</div>
 					</div>
@@ -137,9 +174,7 @@
 	<!-- Hero Section End -->
 
 	<%  //working here start
-
                      String cat = request.getParameter("category");
-
                            List<Product> prodlist = null;
                             
                        if(cat==null||cat.trim().equals("all"))
@@ -151,7 +186,6 @@
                           int id =Integer.parseInt(cat.trim());
                           prodlist = productdao.getAllProductsById(id);
                     }   //working here end 
-
      %>
 
 	<!--   Featured Section Begin -->
@@ -187,13 +221,11 @@
 						<div class="featured__item__pic set-bg"
 							data-setbg="img/latest-product/<%=product.getProd_imageName() %>"
 							style="background-image: url(&quot;img/latest-product/<%=product.getProd_imageName() %>&quot;);">
-
 							<ul class="featured__item__pic__hover">
 								<li><a href="#"><i class="fa fa-heart"></i></a></li>
 								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
 							</ul>
 						</div>
-
 						<div class="featured__item__text">
 							<h5>
 								<a href="Product-details.jsp?product=<%=product.getId() %>"
@@ -213,8 +245,7 @@
 
 							<a href="addToCart?id=<%=product.getId() %>" class="primary-btn" style="background-color: #87CEEB"  onMouseOver="this.style.backgroundColor='#808080'"
 								onMouseOut="this.style.backgroundColor='#87CEEB'">
-								 <i class="fa fa-shopping-cart"></i>ADD TO CARD </a>
-						</div>
+								 <i class="fa fa-shopping-cart"></i>ADD TO CARD </a></div>
 					</div>
 				</div>
 
@@ -373,8 +404,7 @@
 	<script src="js/mixitup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
-	 <script src="js/cart.js"></script>
-
+	<script src="js/cart.js"></script>
 
 </body>
 

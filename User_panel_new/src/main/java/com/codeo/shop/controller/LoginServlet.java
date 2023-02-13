@@ -25,6 +25,8 @@ import javax.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
 	
 	
+		private static final long serialVersionUID = 1L;
+
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String user_emailid = request.getParameter("Email");
 			String user_pass = request.getParameter("password");
@@ -35,24 +37,34 @@ public class LoginServlet extends HttpServlet {
 				
 				/*
 				Connection con = ConnectionProvider.getconnection();
-				
 				 PreparedStatement ps = con.prepareStatement("select * from user_registration where user_emailid=? and user_pass=?");
 				 ps.setString(1,user_emailid );
 		            ps.setString(2, user_pass);
 		            ResultSet rs = ps.executeQuery();
 		        */
 				ResultSet rs = UserDaoImpl.getUserDetails(user_emailid, user_pass);
+				 HttpSession session1=request.getSession();
+				
+				//session1.setAttribute("UserName", rs.getString("user_name"));
+				//session1.setAttribute("email", rs.getString("user_emailid"));
 				
 		            if (rs.next()) {
 		                String role = rs.getString("user_type");
+		                String username = rs.getString("user_name");
+		                String useremail = rs.getString("user_emailid");
+		                session1.setAttribute("UserName", username);
+		                session1.setAttribute("UserEmail", useremail);
+		                session1.setAttribute("usertype", role);
 		                
 		                if (role.equals("Admin")) {
 		                    request.setAttribute("username", user_emailid);
 		                    request.getRequestDispatcher("dashbord.jsp").forward(request, response);
-		                } else {
+		                } 
+		                else {
 		                    request.setAttribute("username", user_emailid);
 		                    request.getRequestDispatcher("index.jsp").forward(request, response);
 		                }
+		                    
 		            } else {
 		                request.setAttribute("errorMessage", "Invalid username or password");
 		                request.getRequestDispatcher("loginfrom.jsp").forward(request, response);
@@ -60,10 +72,7 @@ public class LoginServlet extends HttpServlet {
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		                 
-		            }
-
-			}
+		     }
+     	}
 			
 		}
-
-

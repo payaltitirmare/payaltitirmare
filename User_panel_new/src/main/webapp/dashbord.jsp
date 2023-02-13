@@ -1,5 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%@page import = "com.codeo.shop.entity.User" %>
+<%@page import = "com.codeo.shop.Dao.UserDaoImpl" %>
+
+<%@page import = "java.util.Map" %>
+
+<%@page import = "com.codeo.shop.controller.CountData" %>	
+	<%
+	 HttpSession session1=request.getSession();
+	
+	String user2=(String)session1.getAttribute("usertype");
+	
+	if(user2==null){
+		
+		session.setAttribute("message", "You are not logged in, Logged in first as a admin");
+		response.sendRedirect("loginfrom.jsp");
+		return;
+	}
+	else if(user2.equals("Normal User")){
+		session.setAttribute("message", "You are not Admin, Logged in first as a admin");
+		response.sendRedirect("loginfrom.jsp");
+		return;
+	}
+	
+	Map<String, Long> m=UserDaoImpl.total_user();
+	String UserCount=String.valueOf(m.get("Total_User"));
+	
+	%>
+	
+	
+	
 <!DOCTYPE html>
 <html lang="en" class="loading">
 
@@ -71,7 +102,7 @@
 									<div class="card-block pt-2 pb-0">
 										<div class="media">
 											<div class="media-body white text-left">
-												<h3 class="font-large-1 mb-0">$2156</h3>
+												<h3 class="font-large-1 mb-0"><%=UserCount %></h3>
 												<span>Total Users</span>
 											</div>
 											<div class="media-right white text-right">
@@ -220,6 +251,12 @@
 							<div class="card">
 								<div class="card-header">
 									<h4 class="card-title mb-0">User List</h4>
+									
+									
+									
+									
+									
+									
 								</div>
 								<div class="card-body">
 									<div class="card-block">
@@ -582,8 +619,6 @@
   $(document).ready(function() {
     $('#welcomeModal').modal('show');
   });
-  
-  
 </script>
  
 

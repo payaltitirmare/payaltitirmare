@@ -35,7 +35,7 @@
 		<div class="loader"></div>
 	</div>
 
-	<jsp:include page="header.html" />
+	<jsp:include page="header.jsp" />
 
 	<%     //out.println(cat);
     		             CategoryDao categorydao = new CategoryDao(); 
@@ -322,7 +322,7 @@
 										</button>
 
 
-										<a href="#" class="primary-btn"
+										<a href="addToCart?id=<%=product.getId() %>" class="primary-btn"
 											style="background-color: #87CEEB"
 											onMouseOver="this.style.backgroundColor='#808080'"
 											onMouseOut="this.style.backgroundColor='#87CEEB'"> <i
