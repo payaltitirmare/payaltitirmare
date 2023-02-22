@@ -1,4 +1,4 @@
-<%
+ <%
  HttpSession session2=request.getSession();
 String user_name1=(String)session2.getAttribute("UserName");
 String user_email1=(String)session2.getAttribute("UserEmail");	
@@ -34,18 +34,16 @@ String user_email1=(String)session2.getAttribute("UserEmail");
 							
 							<% if(user_name1==null){ %>
 							<div class="header__top__right_register">
-								<a href="loginfrom.jsp"><i class="fa fa-user"></i> Login</a>
+								<a href="loginfrom.jsp" style="color:red"><i class="fa fa-user" style="color:red"></i> Login</a>
 								
-								<a href="RegistrationForm.jsp"><i class="fa fa-user"></i>
+								<a href="RegistrationForm.jsp" style="color:red"><i class="fa fa-user" style="color:red"></i>
 									Register</a>
 									</div>
 								<% } else{ %>
 								
-								<a href="loginfrom.jsp"><i class="fa fa-user"></i> LogOut</a>
+								<a href="loginfrom.jsp" style="color:red"><i class="fa fa-user"style="color:red"></i> LogOut</a>
 								
 								<% }  %>
-							
-							
 							
 						</div>
 					</div>
@@ -81,8 +79,15 @@ String user_email1=(String)session2.getAttribute("UserEmail");
 					<div class="header__cart">
 						<ul>
 							<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-							<li><a href="./shoping-cart.jsp"><i
-									class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+							
+			<!-- here i get dynamic cart number when i add class="badge badge-danger" -->
+							<li><a href="./shoping-cart.jsp">  <i class="fa fa-shopping-bag"></i>
+						<span class="badge badge-danger">${cart_list.size()}</span></a></li>
+
+  
+						<li> <a href="#" style="color:black">Orders</a></li>
+
+						
 						</ul>
 						<div class="header__cart__price">
 							item: <span>$150.00</span>

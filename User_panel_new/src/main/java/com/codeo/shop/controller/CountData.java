@@ -16,6 +16,7 @@ public class CountData extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	 try {
@@ -24,9 +25,8 @@ public class CountData extends HttpServlet{
 		
 		HttpSession session=request.getSession();
 		session.setAttribute("TotalUser", UserCount);
-	} 
-	 catch (SQLException e) {
-		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	

@@ -1,3 +1,4 @@
+
   <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" %>
 	<%@ page isELIgnored="false" %>
@@ -63,6 +64,9 @@ if(cart_list !=null)
 
 
 <body>
+
+  
+   
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -91,7 +95,7 @@ if(cart_list !=null)
 							<li><a href="#">Oatmeal</a></li>
 							<li><a href="#">Fresh Bananas</a></li>
 						</ul>
-					</div>
+					</div>  
 				</div>
 				<div class="col-lg-9">
 					<div class="hero__search">
@@ -177,7 +181,8 @@ if(cart_list !=null)
 </td>
 	        <td id="totalPriceCell-<%=c.getId()%>" class="shoping__cart__total"> </td>
 	       
-	         <td><button class="remove-btn">Remove</button></td>
+	         <td><button class="remove-btn" onclick="removeItem(<%=c.getId()%>)">Remove</button>
+								</td>
 	         
 			<!-- <td class="shoping__cart__total"></td>
 					<td class="shoping__cart__item__close"><span class="icon_close"></span></td>  -->
@@ -249,65 +254,48 @@ if(cart_list !=null)
 
   
 <script type="text/javascript">
-
-function incrementValue(id) {
+function decrementValue(id) {
 	  var value = parseInt(document.getElementById("number-" + id).value, 10);
-	  value = isNaN(value) ? 1 : value + 1;
+	  value = isNaN(value) ? 0 : value;
+	  value < 1 ? value = 1 : '';
+	  value--;
 	  document.getElementById("number-" + id).value = value;
-	  calculateTotalPrice(id);
+	  updatePrice(id);
 	}
 
-	function decrementValue(id) {
+	function incrementValue(id) {
 	  var value = parseInt(document.getElementById("number-" + id).value, 10);
-	  value = isNaN(value) || value <= 1 ? 1 : value - 1;
+	  value = isNaN(value) ? 0 : value;
+	  value++;
 	  document.getElementById("number-" + id).value = value;
-	  calculateTotalPrice(id);
+	  updatePrice(id);
 	}
 
-	function calculateTotalPrice(id) {
-	  var quantity = parseInt(document.getElementById("number-" + id).value, 10);
+	function updatePrice(id) {
 	  var price = parseFloat(document.getElementById("price-" + id).innerHTML);
-	  var totalPrice = quantity * price;
+	  var quantity = parseInt(document.getElementById("number-" + id).value, 10);
+	  var totalPrice = price * quantity;
 	  document.getElementById("totalPriceCell-" + id).innerHTML = totalPrice.toFixed(2);
-	  AllTotalAmount();
+	  updateTotalAmount();
 	}
 
-	
-	function AllTotalAmount() {
-	  total = 0;
-	  var totalPriceCells = document.querySelectorAll("[id^='totalPriceCell-']");
-	  for (var i = 0; i < totalPriceCells.length; i++) {
-	    total += parseFloat(totalPriceCells[i].innerHTML);
+	function updateTotalAmount() {
+	  var totalAmount = 0;
+	  var rows = document.getElementsByClassName("shoping__cart__total");
+	  for (var i = 0; i < rows.length; i++) {
+	    totalAmount += parseFloat(rows[i].innerHTML);
 	  }
-	  document.querySelector("#total").innerHTML = "Total Price: " + total.toFixed(2);
+	  document.getElementById("total").innerHTML = "Total Price: " + totalAmount.toFixed(2);
 	}
-	
-   const removeBtns = document.querySelectorAll('.remove-btn');
 
-   removeBtns.forEach(btn => {
-    btn.addEventListener('click', function(event) {
-    const cartItem = event.target.parentElement.parentElement;
-    const productId = cartItem.querySelector("input[id^='number-']").id.split("-")[1];
-    removeFromCart(productId);
-    cartItem.remove();
-     });
-  });
+	document.querySelectorAll('.remove-btn').forEach(function (removeBtn) {
+	  removeBtn.addEventListener('click', function (e) {
+	    e.target.parentNode.parentNode.remove();
+	    updateTotalAmount();
+	  });
+	});
 
-   function removeFromCart(productId) {
-	   const xhr = new XMLHttpRequest();
-	   xhr.open('DELETE', `/cart/${productId}`, true);
-	   xhr.onreadystatechange = function() {
-	     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-	       console.log(`Product with id ${productId} was removed from the cart.`);
-	       const totalPrice = xhr.response; // assuming that the response from the server is the updated total price
-	       document.querySelector('#total').textContent = `Total Price: \u20B9 ${totalPrice}`;
-	       AllTotalAmount();
-	     }
-	   };
-
-	   xhr.send();
-	 }
-
+   
 </script>
 
 

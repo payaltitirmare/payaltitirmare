@@ -115,6 +115,7 @@
 	<%  //working here start
         
       String cat = request.getParameter("category");
+	
             List<Product> prodlist = null;
                             
                        if(cat==null||cat.trim().equals("all"))
@@ -221,7 +222,6 @@
 							<div class="latest-product__text">
 							<!--  
 								<h4>Latest Products</h4>
-
 								<div class="latest-product__slider owl-carousel">
 									<div class="latest-prdouct__slider__item">
 										<a href="#" class="latest-product__item">
@@ -286,11 +286,16 @@
 				</div>
 
       
-
+     
+ 
 				<div class="col-lg-9 col-md-7">
 					<div class="product__discount">
 						<div class="row">
-							<%  for(Product product :prodlist)  {  %>
+							<%  for(Product product :prodlist)  {  
+							
+							
+							
+							%>
 
 							<div class="col-lg-4 col-md-6 col-sm-6">
 								<div class="product__item">
@@ -345,7 +350,8 @@
 		</div>
 	</section>
 	<!-- Product Section End -->
-
+	
+	
 	<jsp:include page="footer.html" />
 	<!-- Js Plugins -->
 	<script src="js/jquery-3.3.1.min.js"></script>

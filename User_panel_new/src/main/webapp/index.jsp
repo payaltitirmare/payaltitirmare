@@ -62,6 +62,8 @@
 <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
+
+
 </head>
 
 <body>
@@ -89,14 +91,9 @@
       </div>
     </div>
   </div>
+  
+  
 </div>
-
-<script>
-  $(document).ready(function() {
-    $('#welcomeModal').modal('show');
-  });
-</script>
- 
 
 <!--  modal end  -->
  
@@ -111,7 +108,7 @@
 	<section class="hero">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3">
+		<div class="col-lg-3">
 					<div class="hero__categories">
 						<div class="hero__categories__all"
 							style="background-color: #87CEEB">
@@ -119,7 +116,7 @@
 								href="index.jsp?category=all" style="color: white">All
 									Categories </a> </span>
 						</div>
-						<ul>
+						<ul>  
 							<%    
             //out.println(cat);
     		         CategoryDao categorydao = new CategoryDao(); 
@@ -128,7 +125,7 @@
            //  List<Product> prodlist= productdao.getAllProducts();
                  %>
 							<%  for(Category c : clist) {  %>
-							<li><a href="index.jsp?category=<%= c.getId() %>"
+						  <li><a href="index.jsp?category=<%= c.getId() %>"
 								onMouseOver="this.style.color='red'"
 								onMouseOut="this.style.color='black'"> <%= c.getCat_title() %>
 							</a></li>
@@ -136,6 +133,7 @@
 						</ul>
 					</div>
 				</div>
+				
 				<div class="col-lg-9">
 					<div class="hero__search">
 						<div class="hero__search__form">
@@ -156,6 +154,8 @@
 							</div>
 						</div>
 					</div>
+					
+					
 					<div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
 						<div class="hero__text">
 							<span>Electrical Appliances</span>
@@ -166,12 +166,78 @@
 							<a href="#" class="primary-btn" style="background-color: #87CEEB">SHOP
 								NOW</a>
 						</div>
-					</div>
+					</div>  
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Hero Section End -->
+
+    <!-- <div><br><a href="#"><img src="img/hero/image.jpg" alt="Windmill Lifestyle Fans" width="100%" height="500%"></a></div>
+   -->
+
+ 
+<!--  category experiment start 
+
+<section class="featured spad">
+		<div class="container">
+			<div class="row">
+			
+    
+			<%  for(Category c : clist) {  %>
+   <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat ">
+				<div style="border: 1px solid grey; " class="mt-5">
+					<div  class="featured__item m-4 " >
+						<a href="index.jsp?category=<%= c.getId() %>"
+								onMouseOver="this.style.color='red'"
+								onMouseOut="this.style.color='black'"> <%= c.getCat_title() %>
+							
+						<img src="img/hero/fan.jpg">
+							
+						</a>
+						</div></div></div>	
+						<% } %>
+					</div>
+	</div>
+</section>  
+   
+   
+   
+   
+   <section class="featured spad">
+  <div class="container">
+    <div class="row">
+      <% for(Category c : clist) { %>
+      <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+        <div style="border: 1px solid grey; margin-top: 5px; position: relative; overflow: hidden;">
+          <a href="index.jsp?category=<%= c.getId() %>" style="display: block;" onMouseOver="this.style.color='red';" onMouseOut="this.style.color='black';">
+            <img src="img/hero/fan.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            <h3 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; color: white; font-size: 24px; margin: 0; text-align: center;">
+              <%= c.getCat_title() %>
+            </h3>
+          </a>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+   
+   
+   
+   
+   
+ category end  -->
+
+
+
+ <div style="margin: 0 auto; width: 90%; padding: 0 10px;">
+  <a href="#">
+    <img src="img/hero/fornt.jpg" alt="Windmill Lifestyle Fans" style="height: 500px; width: 100%;">
+  </a>
+</div>
+
+  
 
 	<%  //working here start
                      String cat = request.getParameter("category");
@@ -187,8 +253,10 @@
                           prodlist = productdao.getAllProductsById(id);
                     }   //working here end 
      %>
-
-	<!--   Featured Section Begin -->
+     
+ 
+ 
+      <!--   Featured Section Begin -->
 	<section class="featured spad">
 		<div class="container">
 			<div class="row">
@@ -216,21 +284,23 @@
                     // List<Product> list = productdao.getAllProducts();
                      for(Product product:prodlist)
                     {   //System.out.println(product.getProd_description()); %>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="img/latest-product/<%=product.getProd_imageName() %>"
+				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat ">
+				<div style="border: 1px solid grey; " class="mt-5">
+					<div  class="featured__item m-4 " >
+						<div   class="featured__item__pic set-bg "
+							
 							style="background-image: url(&quot;img/latest-product/<%=product.getProd_imageName() %>&quot;);">
+							<img style="max-height: 200px; height:auto; " class="center" src="img/latest-product/<%=product.getProd_imageName() %>">
 							<ul class="featured__item__pic__hover">
 								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
+								<li><a href="Product-details.jsp?product=<%=product.getId() %>"><i class="fa fa-retweet"></i></a></li>
 							</ul>
 						</div>
 						<div class="featured__item__text">
-							<h5>
+							<h6>
 								<a href="Product-details.jsp?product=<%=product.getId() %>"
 									style="color: black"><%=product.getProd_name() %></a>
-							</h5>
+							</h6>
 							<!--   <h6><%=product.getProd_description() %></h6> -->
 							<!--  <h5> <span>&#8377; </span><%=product.getProd_price() %> </h5> <br> -->
 							<button type="button" class="btn btn-light">
@@ -242,10 +312,14 @@
 									</span>
 								</h5>
 							</button>
-
-							<a href="addToCart?id=<%=product.getId() %>" class="primary-btn" style="background-color: #87CEEB"  onMouseOver="this.style.backgroundColor='#808080'"
-								onMouseOut="this.style.backgroundColor='#87CEEB'">
-								 <i class="fa fa-shopping-cart"></i>ADD TO CARD </a></div>
+						
+								<a href="addToCart?id=<%=product.getId() %>" class="primary-btn" style="background-color: #87CEEB"  onMouseOver="this.style.backgroundColor='#808080'"
+								onMouseOut="this.style.backgroundColor='#87CEEB'" >
+								 <i class="fa fa-shopping-cart"></i>ADD TO CARD </a>
+								 <div > <a href="shoping-cart.jsp" class="btn btn-warning btn-sm mt-1">  View CART </a></div>
+								  
+						</div>
+					</div>
 					</div>
 				</div>
 
@@ -256,7 +330,18 @@
 		</div>
 	</section>
 	<!-- Featured Section End -->
+      
+      
+   
+  <div style="margin: 0 auto; width: 90%; padding: 0 10px;">
+  <a href="#">
+    <img src="img/hero/image.jpg" alt="Windmill Lifestyle Fans" style="height: 500px; width: 100%;">
+  </a>
+</div>
 
+<br><br>
+
+   
 	<!-- Categories Section Begin -->
 	<section class="categories">
 		<div class="container">
@@ -306,13 +391,18 @@
 			</div>
 		</div>
 	</section>
+	
+	
+	
+	
 	<!-- Categories Section End -->
 	<br>
 	<br>
 	<br>
 
+    
 	<!-- Banner Begin -->
-	<div class="banner">
+	<div class="banner" >
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6">
@@ -321,7 +411,7 @@
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6">
-					<div class="banner__pic">
+					<div class="banner__pic" >
 						<img src="img/banner/lighthome.jpg" alt="">
 					</div>
 				</div>
@@ -392,6 +482,12 @@
 			</div>
 		</div>
 	</section>
+	
+	
+	
+	
+	
+	
 	<!-- Blog Section End -->
 	<jsp:include page="footer.html" />
 
@@ -406,6 +502,14 @@
 	<script src="js/main.js"></script>
 	<script src="js/cart.js"></script>
 
+  <!-- 
+<script>
+  $(document).ready(function() {
+    $('#welcomeModal').modal('show');
+  });
+</script>
+ -->
+   
 </body>
 
 </html>

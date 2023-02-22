@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,11 +31,14 @@ public class LoginServlet extends HttpServlet {
 			String user_pass = request.getParameter("password");
 			String user_type = request.getParameter("user_type");
 			
+			
+			
 			try
 			{
 				
 				/*
 				Connection con = ConnectionProvider.getconnection();
+				
 				 PreparedStatement ps = con.prepareStatement("select * from user_registration where user_emailid=? and user_pass=?");
 				 ps.setString(1,user_emailid );
 		            ps.setString(2, user_pass);
@@ -55,16 +57,15 @@ public class LoginServlet extends HttpServlet {
 		                session1.setAttribute("UserName", username);
 		                session1.setAttribute("UserEmail", useremail);
 		                session1.setAttribute("usertype", role);
-		                
 		                if (role.equals("Admin")) {
 		                    request.setAttribute("username", user_emailid);
 		                    request.getRequestDispatcher("dashbord.jsp").forward(request, response);
-		                } 
-		                else {
+		                } else {
 		                    request.setAttribute("username", user_emailid);
 		                    request.getRequestDispatcher("index.jsp").forward(request, response);
 		                }
-		                    
+		                
+		                
 		            } else {
 		                request.setAttribute("errorMessage", "Invalid username or password");
 		                request.getRequestDispatcher("loginfrom.jsp").forward(request, response);
@@ -72,7 +73,10 @@ public class LoginServlet extends HttpServlet {
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		                 
-		     }
-     	}
+		            }
+
+			}
 			
 		}
+
+

@@ -1,9 +1,7 @@
 package com.codeo.shop.Dao;
 
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
-
 import com.codeo.shop.entity.User;
 
 public interface UserDAO {
@@ -17,14 +15,13 @@ public interface UserDAO {
 
 	boolean update(User user);
 	
-	public static Map<String, Long> getUserCount()
-	{
+	public static Map<String, Long> getUserCount() {
 		return user_count;
 	}
-	
 	//boolean count_user(User user);
 	//User edituser(int id);
 
 	User loginDetails(String user_emailid,String user_pass);
    
-  }
+	
+}

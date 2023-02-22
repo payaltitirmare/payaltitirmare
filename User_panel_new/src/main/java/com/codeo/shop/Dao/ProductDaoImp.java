@@ -12,15 +12,12 @@ import com.codeo.shop.entity.Cart;
 import com.codeo.shop.entity.Product;
 
 public class ProductDaoImp implements ProductDao {
-
 	
 	private static final String insert_Product ="insert into product_operation(prod_name, prod_description, prod_price, prod_discount, prod_quantity,prod_imageName,cid) values(?,?,?,?,?,?,?)";
 	private static final String selct_product ="SELECT * FROM product_operation ";
     private static final String Edit_product ="select * from product_operation where prod_id=?";
     //private static final String Update_product = "UPDATE product_operation SET name = '"+product.getProd_name()+"', "+ "description = '"+product.getProd_description()+"',  price = '"+product.getProd_price()+"', discount = '"+product.getProd_discount()+"',quantity = '"+product.getProd_quantity()+"',image = '"+product.getProd_imageName()+"' where id="+product.getId();
 	
-  
-    
 	Connection con = null;
     PreparedStatement preparedStatement  =null;
     Statement statement = null;
@@ -240,6 +237,7 @@ public class ProductDaoImp implements ProductDao {
 				product.setProd_price(resultset.getString("prod_price"));
 				product.setProd_discount(resultset.getString("prod_discount"));
 				product.setProd_imageName(resultset.getString("prod_imageName"));
+				product.setCid(resultset.getInt("cid"));
 			
 				list.add(product);
 			}
@@ -343,7 +341,7 @@ public class ProductDaoImp implements ProductDao {
          
 		return listProduct;
 	 }
-	@Override
+		@Override
 	public List<Cart> getCartProducts(ArrayList<Cart> cartlist) {
 		
 		List<Cart> products=new ArrayList<Cart>();
@@ -417,6 +415,4 @@ public class ProductDaoImp implements ProductDao {
 		return sum;
 		}
 	
-	
-	
-	}
+  }
