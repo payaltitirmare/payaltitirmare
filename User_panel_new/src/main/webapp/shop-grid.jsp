@@ -27,6 +27,8 @@
 <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/CommonScript.js"></script>
 </head>
 
 <body>
@@ -45,55 +47,7 @@
                           //  List<Product> prodlist= productdao.getAllProducts();
         %>
 
-	<!-- Hero Section Begin -->
-	<section class="hero hero-normal">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3">
-					<div class="hero__categories">
-						<div class="hero__categories__all"
-							style="background-color: #87CEEB">
-							<i class="fa fa-bars"></i> <span><a
-								href="shop-grid.jsp?category=all" style="color: white">All
-									Categories </a> </span>
-						</div>
-						<ul>
-
-							<%  for(Category c : clist) {  %>
-							<li><a href="shop-grid.jsp?category=<%= c.getId() %>"
-								onMouseOver="this.style.color='red'"
-								onMouseOut="this.style.color='black'"> <%= c.getCat_title() %>
-							</a></li>
-							<%  }  %>
-
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-9">
-					<div class="hero__search">
-						<div class="hero__search__form">
-							<form action="#">
-
-								<input type="text" placeholder="What do yo u need?">
-								<button type="submit" class="site-btn"
-									style="background-color: #87CEEB">SEARCH</button>
-							</form>
-						</div>
-						<div class="hero__search__phone">
-							<div class="hero__search__phone__icon">
-								<i class="fa fa-phone"></i>
-							</div>
-							<div class="hero__search__phone__text">
-								<h5>+65 11.188.888</h5>
-								<span>support 24/7 time</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Hero Section End -->
+	
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg" data-setbg="img/Name-bg.jpg">
@@ -132,16 +86,26 @@
 	<section class="product spad">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3 col-md-5">
-					<div class="sidebar">
-						<div class="sidebar__item">
-							<h4>All Category</h4>
+				<div class="col-lg-3">
+					<div class="hero__categories">
+						<div class="hero__categories__all">
+							 <span><a style="color: white">ALLCATEGORIES </a> </span><br>
+						</div>
 							<ul>
 
-								<%  for(Category c : clist) {  %>
-								<li><a href="shop-grid.jsp?category=<%= c.getId() %>"
+								
+								<li><a href="shop-grid.jsp"
 									onMouseOver="this.style.color='red'"
-									onMouseOut="this.style.color='green'"> <%= c.getCat_title() %>
+									onMouseOut="this.style.color='green'">All CATEGORIES 
+								</a></li>
+								
+
+							
+
+								<%  for(Category c : clist) {  %>
+								<li><a href="shop-grid.jsp?category=<%=c.getId()%>"
+									onMouseOver="this.style.color='red'"
+									onMouseOut="this.style.color='green'"> <%= c.getCat_title().toUpperCase() %>
 								</a></li>
 								<%  }  %>
 
@@ -220,89 +184,25 @@
 						<div class="sidebar__item">
 						
 							<div class="latest-product__text">
-							<!--  
-								<h4>Latest Products</h4>
-								<div class="latest-product__slider owl-carousel">
-									<div class="latest-prdouct__slider__item">
-										<a href="#" class="latest-product__item">
-											<div class="latest-product__item__pic">
-												<img src="img/latest-product/lp-1.jpg" alt="">
-											</div>
-											<div class="latest-product__item__text">
-												<h6>Crab Pool Security</h6>
-												<span>$30.00</span>
-											</div>
-										</a> <a href="#" class="latest-product__item">
-											<div class="latest-product__item__pic">
-												<img src="img/latest-product/lp-2.jpg" alt="">
-											</div>
-											<div class="latest-product__item__text">
-												<h6>Crab Pool Security</h6>
-												<span>$30.00</span>
-											</div>
-										</a> <a href="#" class="latest-product__item">
-											<div class="latest-product__item__pic">
-												<img src="img/latest-product/lp-3.jpg" alt="">
-											</div>
-											<div class="latest-product__item__text">
-												<h6>Crab Pool Security</h6>
-												<span>$30.00</span>
-											</div>
-										</a>
-									</div>
-									
-									
-									<div class="latest-prdouct__slider__item">
-										<a href="#" class="latest-product__item">
-											<div class="latest-product__item__pic">
-												<img src="img/latest-product/lp-1.jpg" alt="">
-											</div>
-											<div class="latest-product__item__text">
-												<h6>Crab Pool Security</h6>
-												<span>$30.00</span>
-											</div>
-										</a> <a href="#" class="latest-product__item">
-											<div class="latest-product__item__pic">
-												<img src="img/latest-product/lp-2.jpg" alt="">
-											</div>
-											<div class="latest-product__item__text">
-												<h6>Crab Pool Security</h6>
-												<span>$30.00</span>
-											</div>
-										</a> <a href="#" class="latest-product__item">
-											<div class="latest-product__item__pic">
-												<img src="img/latest-product/lp-3.jpg" alt="">
-											</div>
-											<div class="latest-product__item__text">
-												<h6>Crab Pool Security</h6>
-												<span>$30.00</span>
-											</div>
-										</a>
-									</div> 
-								</div>  -->
+							
 							</div>
 						</div> 
 					</div>
-				</div>
+				
 
       
-     
- 
+
 				<div class="col-lg-9 col-md-7">
 					<div class="product__discount">
 						<div class="row">
-							<%  for(Product product :prodlist)  {  
-							
-							
-							
-							%>
+							<%  for(Product product :prodlist)  {  %>
 
 							<div class="col-lg-4 col-md-6 col-sm-6">
-								<div class="product__item">
+							<div style="border: 1px solid grey; " class="mt-5">
+								<div class="product__item m-4">
 									<div class="featured__item__pic set-bg"
-										data-setbg="img/latest-product/<%=product.getProd_imageName() %>"
 										style="background-image: url(&quot;img/latest-product/<%=product.getProd_imageName() %>&quot;);">
-
+										<img style="max-height: 200px; height:auto; " class="center" src="img/latest-product/<%=product.getProd_imageName() %>">
 										<ul class="product__item__pic__hover">
 											<li><a href="#"><i class="fa fa-heart"></i></a></li>
 											<li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -321,20 +221,23 @@
 												&#8377;<%=product.getPriceAfterDiscount() %>/- <span
 													style="font-size: 15px; font-style: italic; text-decoration: line-through; color: red">
 													<%=product.getProd_price() %> , <%=product.getProd_discount() %>
-													off
+													%off
 												</span>
 											</h5>
 										</button>
 
 
-										<a href="addToCart?id=<%=product.getId() %>" class="primary-btn"
-											style="background-color: #87CEEB"
+										<button  class="primary-btn"
+											
 											onMouseOver="this.style.backgroundColor='#808080'"
-											onMouseOut="this.style.backgroundColor='#87CEEB'"> <i
-											class="fa fa-shopping-cart"></i>ADD TO CARD
-										</a>
+											onMouseOut="this.style.backgroundColor='red'" 
+											onclick="add_to_cart(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName() %>')"> <i
+											class="fa fa-shopping-cart"></i>ADD TO CARD</button>
+											 <div > <a href="shoping-cart.jsp" class="btn btn-warning btn-sm mt-1">  View CART </a></div>
+								
 
 									</div>
+								</div>
 								</div>
 							</div>
 							<%  } %>

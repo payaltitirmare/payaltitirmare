@@ -3435,7 +3435,20 @@ transparent;
 
 
 
-// My profile Modal 
-.my_profile{
+/*--------------------------------- My profile Modal -----------------------------*/
+.my_profile {
 	
 }
+
+
+/*--------------------------------- Banner Arrow -----------------------------*/
+
+ .carousel-control-next-icon, .carousel-control-prev-icon{
+height: 60px;
+    width: 60px;
+    outline: black;
+    background-color: rgba(0, 0, 0, 0.3);
+    background-size: 100%, 100%;
+    border-radius: 50%;
+    
+    }

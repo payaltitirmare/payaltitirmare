@@ -1,13 +1,16 @@
- <%
- HttpSession session2=request.getSession();
-String user_name1=(String)session2.getAttribute("UserName");
-String user_email1=(String)session2.getAttribute("UserEmail");	
- %>
+
+<%
+HttpSession session2 = request.getSession();
+String user_name1 = (String) session2.getAttribute("UserName");
+String user_email1 = (String) session2.getAttribute("UserEmail");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Header </title>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/CommonScript.js"></script>
 </head>
 <body>
 
@@ -31,20 +34,27 @@ String user_email1=(String)session2.getAttribute("UserEmail");
 									class="fa fa-linkedin"></i></a> <a href="#"><i
 									class="fa fa-instagram"></i></a>
 							</div>
-							
-							<% if(user_name1==null){ %>
+
+							<%
+							if (user_name1 == null) {
+							%>
 							<div class="header__top__right_register">
-								<a href="loginfrom.jsp" style="color:red"><i class="fa fa-user" style="color:red"></i> Login</a>
-								
-								<a href="RegistrationForm.jsp" style="color:red"><i class="fa fa-user" style="color:red"></i>
+								<a href="loginfrom.jsp"><i class="fa fa-user"></i> Login</a> <a
+									href="RegistrationForm.jsp"><i class="fa fa-user"></i>
 									Register</a>
-									</div>
-								<% } else{ %>
-								
-								<a href="loginfrom.jsp" style="color:red"><i class="fa fa-user"style="color:red"></i> LogOut</a>
-								
-								<% }  %>
-							
+							</div>
+							<%
+							} else {
+							%>
+
+							<a href="loginfrom.jsp?"><i class="fa fa-user"></i> LogOut</a>
+
+							<%
+							}
+							%>
+
+
+
 						</div>
 					</div>
 				</div>
@@ -65,13 +75,10 @@ String user_email1=(String)session2.getAttribute("UserEmail");
 
 							<li><a href="./index.jsp">Home</a></li>
 							<li><a href="shop-grid.jsp">Shop</a></li>
-							<li><a href="#">Blog</a></li>
+							<li><a href="blog.jsp">Blog</a></li>
 							<li><a href="./contact.jsp">Contact</a></li>
-							<li><a href="#">Pages</a>
-								<ul class="header__menu__dropdown">
-									<li><a href="#">Shop Details</a></li>
-									<li><a href="#">Blog Details</a></li>
-								</ul></li>
+							
+								
 						</ul>
 					</nav>
 				</div>
@@ -79,15 +86,14 @@ String user_email1=(String)session2.getAttribute("UserEmail");
 					<div class="header__cart">
 						<ul>
 							<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+
+							<!-- here i get dynamic cart number when i add class="badge badge-danger" -->
+							<li><a href="./shoping-cart.jsp"> <i
+									class="fa fa-cart-plus " style="font-size:33px;"></i> <span
+									 class="cartItem" >0</span></a></li>
+
 							
-			<!-- here i get dynamic cart number when i add class="badge badge-danger" -->
-							<li><a href="./shoping-cart.jsp">  <i class="fa fa-shopping-bag"></i>
-						<span class="badge badge-danger">${cart_list.size()}</span></a></li>
 
-  
-						<li> <a href="#" style="color:black">Orders</a></li>
-
-						
 						</ul>
 						<div class="header__cart__price">
 							item: <span>$150.00</span>
