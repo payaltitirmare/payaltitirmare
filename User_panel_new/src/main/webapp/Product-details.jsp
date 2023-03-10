@@ -37,56 +37,10 @@
 
 
 	<jsp:include page="header.jsp" />
+<!-- Toast msg -->
+	<div id="toast">Error in cart</div>
+	<!-- Toast msg end -->
 
-	<!-- Hero Section Begin -->
-	<section class="hero hero-normal">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3">
-					<!--  <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
-                        </ul>
-                    </div> -->
-				</div>
-				<div class="col-lg-9">
-					<div class="hero__search">
-						<div class="hero__search__form">
-							<form action="#">
-
-								<input type="text" placeholder="What do yo u need?">
-								<button type="submit" class="site-btn">SEARCH</button>
-							</form>
-						</div>
-						<div class="hero__search__phone">
-							<div class="hero__search__phone__icon">
-								<i class="fa fa-phone"></i>
-							</div>
-							<div class="hero__search__phone__text">
-								<h5>+65 11.188.888</h5>
-								<span>support 24/7 time</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Hero Section End -->
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg" data-setbg="img/Name-bg.jpg">
@@ -95,8 +49,7 @@
 				<div class="col-lg-12 text-center">
 					<div class="breadcrumb__text">
 					<div class="breadcrumb__option">
-							<a href="./index.jsp">Home</a> <a href="#">Electrical</a> <span>Vegetable’s
-								Package</span>
+							<a href="./index.jsp">Home</a> <a href="#">Product Details</a> 
 						</div>
 					</div>
 				</div>
@@ -111,6 +64,7 @@
                                 ProductDaoImp productdao = new ProductDaoImp();  
                                 
                                 String prod = request.getParameter("product");
+
                                 List<Product> prodlist = null;
                                 List<Product> prodlistbycat = null;
                                  
@@ -168,7 +122,7 @@
 								class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 								class="fa fa-star-half-o"></i> <span>(18 reviews)</span>
 						</div>
-						<div class="product__details__price"><%=product.getPriceAfterDiscount() %>/-
+						<div class="product__details__price">Rs.<%=product.getPriceAfterDiscount() %>/-
 							<span
 								style="font-size: 15px; font-style: italic; text-decoration: line-through; color: red">
 								<%=product.getProd_price() %> , <%=product.getProd_discount() %>
@@ -177,14 +131,11 @@
 						</div>
 						<p><%=product.getProd_description() %>
 						<div class="product__details__quantity">
-							<div class="quantity">
-								<div class="pro-qty">
-									<input type="text" value="1">
-								</div>
-							</div>
 						</div>
-						<a href="addToCart?id=<%=product.getId() %>" class="primary-btn">ADD TO CARD</a> <a href="#"
-							class="heart-icon"><span class="icon_heart_alt"></span></a>
+						<a style="color:white; cursor:pointer" onclick="add_to_cart(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName() %>')"
+						  class="primary-btn">ADD TO CARD</a>	  <a href="shoping-cart.jsp" style="height:50px; width:70px;" class="btn btn-warning btn-sm mt-1">  View CART </a>
+								 <a onclick="likeProducts(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName() %>')"
+							style="cursor:pointer" class="heart-icon"><span class="icon_heart_alt"></span></a>
 						<ul>
 							<li><b>Availability</b> <span>In Stock</span></li>
 							<li><b>Shipping</b> <span>01 day shipping. <samp>Free
@@ -221,43 +172,7 @@
 									</p>
 								</div>
 							</div>
-							<!--   <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
-                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-                                        Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
-                                        Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
-                                        sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
-                                        eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
-                                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
-                                        sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
-                                        diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
-                                        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                                        Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
-                                        Proin eget tortor risus.</p>
-                                    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
-                                        ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
-                                        elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
-                                        porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus
-                                        nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
-                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-                                        Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
-                                        Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
-                                        sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
-                                        eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
-                                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
-                                        sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
-                                        diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
-                                        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                                        Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
-                                        Proin eget tortor risus.</p>
-                                </div>
-                            </div>    -->
+							
 						</div>
 					</div>
 					
@@ -300,11 +215,11 @@
                     	%>
                     	
 				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="img/latest-product/<%=catproduct.getProd_imageName() %>"
-							style="background-image: url(&quot;img/latest-product/<%=catproduct.getProd_imageName() %>&quot;);">
-
+				<div style="border: 1px solid grey; " class="mt-5">
+					<div class="featured__item m-4">
+						<div  class="featured__item__pic set-bg"
+							 style="background-image: url(&quot;img/latest-product/<%=catproduct.getProd_imageName() %>&quot;);">
+								<img style="max-height: 200px; height:auto; " class="center" src="img/latest-product/<%=catproduct.getProd_imageName() %>">
 							<ul class="featured__item__pic__hover">
 								<li><a href="#"><i class="fa fa-heart"></i></a></li>
 								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -328,10 +243,14 @@
 								</h5>
 							</button>
 							
-							<a href="addToCart?id=<%=catproduct.getId() %>" class="primary-btn" style="background-color: #87CEEB"  onMouseOver="this.style.backgroundColor='#808080'"
-								onMouseOut="this.style.backgroundColor='#87CEEB'">
-								 <i class="fa fa-shopping-cart"></i>ADD TO CARD </a>
+							<a  class="primary-btn" style="background-color: red; color:white;"  onMouseOver="this.style.backgroundColor='#808080'"
+								onMouseOut="this.style.backgroundColor='red'"
+									onclick="add_to_cart(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName() %>')">
+								 <i  class="fa fa-shopping-cart"></i>ADD TO CARD </a>
+								 	 <div > <a href="shoping-cart.jsp" class="btn btn-warning btn-sm mt-1">  View CART </a></div>
+								
 						</div>
+					</div>
 					</div>
 				</div>
 

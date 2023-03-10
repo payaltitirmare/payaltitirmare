@@ -1,7 +1,6 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="com.codeo.shop.entity.Product"%>
 <%@page import="java.sql.*"%>
@@ -38,7 +37,7 @@
 <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
-<script type="text/javascript" src="js/CommonScript.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"
 	integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
 	crossorigin="anonymous"></script>
@@ -49,8 +48,8 @@
 	rel="stylesheet" id="bootstrap-css">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="js/CommonScript.js"></script>
+
+
 
 </head>
 
@@ -82,7 +81,7 @@
 	<!-- Shoping Cart Section Begin -->
 	<section class="shoping-cart spad">
 
-		<!-- <h3>Total Price:${(total>0)?total:0}</h3> -->
+		
 
 		<div class="container">
 			<div class="row">
@@ -93,12 +92,13 @@
 				</div>
 			</div>
 			<div class="row">
+			
 				<div class="col-lg-12">
 					<div class="shoping__cart__btns">
-						<a href="shop-grid.jsp" class="primary-btn cart-btn">CONTINUE SHOPPING</a> <a
-							href="#" class="primary-btn cart-btn cart-btn-right"> <span
-							class="icon_loading"></span> Upadate Cart
-						</a>
+						<a href="shop-grid.jsp" class="primary-btn cart-btn">CONTINUE SHOPPING</a> <button onclick="clearCart()"
+							 class="primary-btn cart-btn cart-btn-right"> <span
+							class="icon_loading"></span> Clear Cart
+						</button>
 					</div>
 				</div>
 
@@ -107,26 +107,30 @@
 					<div class="shoping__continue">
 						<div class="shoping__discount">
 							<h5>Discount Codes</h5>
-							<form action="#">
-								<input type="text" placeholder="Enter your coupon code">
+							
+								<input style="height: 45px; "  type="text" placeholder="Enter your coupon code">
 								<button type="submit" class="site-btn">APPLY COUPON</button>
-							</form>
+								
+							
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-lg-6">
-					<div class="shoping__checkout">
+					<div class="shoping__checkout" id="checkoutbutton">
+					
 						<h5>PRICE DETAILS</h5>
 						<ul>
 							<li>TOTAL ORDER <span class="totalOrder"></span></li>
 							<li>DELIVERY CHARGE <span class="charges"></span></li>
 							<li><h3 >Total Price: <span class="totalPrice"></span></h3></li>
 
-						</ul>
-						<a href="./checkout.jsp" class="primary-btn">PROCEED TO
-							CHECKOUT</a>
+						</ul><form action="cartlength"><input type="hidden" id="cartlegth" name="cartlegth">
+						<button style="width:100%;" type="submit"  class="primary-btn">PROCEED TO
+							CHECKOUT</button></form>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</section>
@@ -143,7 +147,7 @@
 	<script src="js/mixitup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
-	<script src="js/cart.js"></script>
+    <script type="text/javascript" src="js/CommonScript.js"></script>
 </body>
 
 </html>

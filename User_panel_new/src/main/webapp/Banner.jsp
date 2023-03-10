@@ -19,39 +19,12 @@
 <meta name="keywords"
 	content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="PIXINVENT">
-<title>Basic DataTables - Apex responsive bootstrap 4 admin
-	template</title>
-<link rel="apple-touch-icon" sizes="60x60"
-	href="app-assets/img/ico/apple-icon-60.html">
-<link rel="apple-touch-icon" sizes="76x76"
-	href="app-assets/img/ico/apple-icon-76.html">
-<link rel="apple-touch-icon" sizes="120x120"
-	href="app-assets/img/ico/apple-icon-120.html">
-<link rel="apple-touch-icon" sizes="152x152"
-	href="app-assets/img/ico/apple-icon-152.html">
-<link rel="shortcut icon" type="image/x-icon"
-	href="app-assets/img/ico/favicon.ico">
-<link rel="shortcut icon" type="image/png"
-	href="app-assets/img/ico/favicon-32.png">
+<title>Admin | Banner</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-touch-fullscreen" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link
-	href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900|Montserrat:300,400,500,600,700,800,900"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="app-assets/fonts/feather/style.min.css">
-<link rel="stylesheet" type="text/css"
-	href="app-assets/fonts/simple-line-icons/style.css">
-<link rel="stylesheet" type="text/css"
-	href="app-assets/fonts/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css"
-	href="app-assets/vendors/css/perfect-scrollbar.min.css">
-<link rel="stylesheet" type="text/css"
-	href="app-assets/vendors/css/prism.min.css">
-<link rel="stylesheet" type="text/css"
-	href="app-assets/vendors/css/tables/datatable/datatables.min.css">
-<!-- END VENDOR CSS-->
+<!-- all  CSS-->
+<%@include file="component/AllCssFIles.jsp" %>
 <!-- BEGIN APEX CSS-->
 <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
 </head>
@@ -81,7 +54,7 @@
 									</div>
 									<div class="card-body">
 										<div class="card-block">
-											<table class="table table-responsive-md text-center">
+											<table class="table table-responsive-md text-center ">
 												<thead>
 													<tr>
 														<th>Banner<br>No
@@ -109,7 +82,7 @@
                                                    
 												 <td><a	href="BannerOperation?action=DELETE&id=<%=b.getBanner_no()%>"><i
 															class="ft-trash font-medium-3 red"></i> </a>|| <a
-														href="BannerOperation?action=EDIT&id=<%=b.getBanner_no()%>">
+														href="#">
 															<i class="ft-edit orange"></i>
 													</a></td>
 													

@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -62,7 +65,7 @@ public class ProductOperationServlet extends HttpServlet {
 		
   String path = request.getServletContext().getRealPath("img")+File.separator+"latest-product"+File.separator+file.getSubmittedFileName(); 
 
-  System.out.println("path is:"+ path);
+  
   
   
   		//upload pic in folder
@@ -87,7 +90,7 @@ public class ProductOperationServlet extends HttpServlet {
 		 {
 			 if(productdao.addProduct(product))
 			 {
-				System.out.println("data is inserted");
+				//System.out.println("data is inserted");
 				dispatcher = request.getRequestDispatcher("View_product.jsp");
 				dispatcher.forward(request, response);
 			 } 

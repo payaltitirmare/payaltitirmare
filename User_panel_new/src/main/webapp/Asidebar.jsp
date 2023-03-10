@@ -35,9 +35,9 @@
 							class="ft-package"></i><span data-i18n="" class="menu-title">Website
 								Master</span></a>
 						<ul class="menu-content">
-							<li><a href="Add_Banner.jsp" class="menu-item"> Add
+							<li><a href="Banner.jsp" class="menu-item">
 									Banner </a></li>
-							<li><a href=" " class="menu-item"> View Banner </a></li>
+							
 							<li><a href="loginfrom.jsp" class="menu-item">Login form</a>
 							</li>
 
@@ -53,7 +53,7 @@
 					<li class="has-sub nav-item"><a href="#"><i
 							class="fa fa-th-list"></i><span data-i18n="" class="menu-title">Orders</span></a>
 						<ul class="menu-content">
-							<li><a href="feather.html" class="menu-item">View Order</a>
+							<li><a href="ViewOrderAdmin.jsp" class="menu-item">View Order</a>
 							</li>
 							<li><a href="font-awesome.html" class="menu-item">Dispatch
 									details</a></li>
@@ -79,7 +79,7 @@
 							class="ft-calendar"></i><span data-i18n="" class="menu-title">Calendar</span></a>
 					</li>
 
-					<li class=" nav-item"><a href="https://pixinvent.ticksy.com/"><i
+					<li class=" nav-item"><a href=""><i
 							class="ft-life-buoy"></i><span data-i18n="" class="menu-title">Support</span></a>
 					</li>
 				</ul>

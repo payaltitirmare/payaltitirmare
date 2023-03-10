@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
+
 <%@page import="java.util.*"%>
 <%@page import="com.codeo.shop.entity.Blog"%>
 <%@page import="com.codeo.shop.entity.Category"%>
@@ -65,14 +66,18 @@
 				
 				
 				<%		String blog_id=request.getParameter("blog");
-			      	    int blogid =Integer.parseInt(blog_id.trim());
+			      	int blogid =Integer.parseInt(blog_id.trim());
 						ProductDaoImp productdao = new ProductDaoImp();
+
 						List<Blog> bloglist1 = productdao.getBlogsDetails(blogid);
 						List<Blog> bloglist2 = productdao.getAllBlogs();
-		   				for (Blog blog : bloglist1) {
+						for (Blog blog : bloglist1) {
+							
 							
 						%>
-							
+						
+						
+						
 				<div class="col-lg-8 col-md-7 order-md-1 order-1">
 					<div class="blog__details__text">
 						<img src="img/blog/<%=blog.getBlog_name()%>" alt="">

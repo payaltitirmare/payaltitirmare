@@ -1,10 +1,6 @@
 package com.codeo.shop.Dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +30,7 @@ private String add_category = "insert into add_category(catTitle,catDescriptor) 
 				String cat_title=rs.getString("catTitle");
 				String cat_description= rs.getString("catDescriptor");
 				list.add(new Category( Id, cat_title,  cat_description )) ;
-				System.out.println(cat_title+" "+ cat_description);
+				
 		}
 		} 
 		catch (SQLException e) {

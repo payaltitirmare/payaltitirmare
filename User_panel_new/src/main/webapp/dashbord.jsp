@@ -1,37 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
-<%@page import = "com.codeo.shop.entity.User" %>
-<%@page import = "com.codeo.shop.Dao.UserDaoImpl" %>
 
-<%@page import = "java.util.Map" %>
 
-<%@page import = "com.codeo.shop.controller.CountData" %>	
-	<%
-	 HttpSession session1=request.getSession();
-	
-	String user2=(String)session1.getAttribute("usertype");
-	
-	if(user2==null){
-		
-		session.setAttribute("message", "You are not logged in, Logged in first as a admin");
-		response.sendRedirect("loginfrom.jsp");
-		return;
-	}
-	else if(user2.equals("Normal User")){
-		session.setAttribute("message", "You are not Admin, Logged in first as a admin");
-		response.sendRedirect("loginfrom.jsp");
-		return;
-	}
-	
-	
-	
-	Map<String, Long> m=UserDaoImpl.total_user();
-	String UserCount=String.valueOf(m.get("Total_User"));
-	%>
-	
-	
-	
+<%@page import="com.codeo.shop.entity.User"%>
+<%@page import="com.codeo.shop.Dao.UserDaoImpl"%>
+<%@page import="com.codeo.shop.Dao.CustomerDao"%>
+
+<%@page import="java.util.Map"%>
+
+<%@page import="com.codeo.shop.controller.CountData"%>
+<%
+HttpSession session1 = request.getSession();
+String user2 = (String) session1.getAttribute("usertype");
+
+if (user2 == null) {
+
+	session.setAttribute("message", "You are not logged in, Logged in first as a admin");
+	response.sendRedirect("loginfrom.jsp");
+	return;
+} else if (user2.equals("Normal User")) {
+	session.setAttribute("message", "You are not Admin, Logged in first as a admin");
+	response.sendRedirect("loginfrom.jsp");
+	return;
+}
+
+Map<String, Long> m = UserDaoImpl.total_user();
+String UserCount = String.valueOf(m.get("Total_User"));
+
+int TotalOrderCount= CustomerDao.getTotalOrderCount();
+int TotalSales= CustomerDao.getTotalSales();
+double total_earning = TotalSales*0.2;
+int TotalEarning=(int)total_earning;
+%>
+
+
+
 <!DOCTYPE html>
 <html lang="en" class="loading">
 
@@ -82,11 +85,9 @@
 
 
 <style type="text/css">
-	.adminprofile{
-		
+.adminprofile {
 	
-	}
-	
+}
 </style>
 
 </head>
@@ -99,8 +100,9 @@
 
 		<%@include file="Navbar.jsp"%>
 
-         
-         
+
+
+
 		<div class="main-panel">
 			<div class="main-content">
 				<div class="content-wrapper">
@@ -112,7 +114,7 @@
 									<div class="card-block pt-2 pb-0">
 										<div class="media">
 											<div class="media-body white text-left">
-												<h3 class="font-large-1 mb-0"><%=UserCount %></h3>
+												<h3 class="font-large-1 mb-0"><%=UserCount%></h3>
 												<span>Total Users</span>
 											</div>
 											<div class="media-right white text-right">
@@ -132,7 +134,7 @@
 									<div class="card-block pt-2 pb-0">
 										<div class="media">
 											<div class="media-body white text-left">
-												<h3 class="font-large-1 mb-0">$1567</h3>
+												<h3 class="font-large-1 mb-0"><%=TotalOrderCount %></h3>
 												<span>Total Order</span>
 											</div>
 											<div class="media-right white text-right">
@@ -154,7 +156,7 @@
 									<div class="card-block pt-2 pb-0">
 										<div class="media">
 											<div class="media-body white text-left">
-												<h3 class="font-large-1 mb-0">$4566</h3>
+												<h3 class="font-large-1 mb-0"><i class="fa fa-rupee"> </i><%=TotalSales %></h3>
 												<span>Total Sales</span>
 											</div>
 											<div class="media-right white text-right">
@@ -174,7 +176,7 @@
 									<div class="card-block pt-2 pb-0">
 										<div class="media">
 											<div class="media-body white text-left">
-												<h3 class="font-large-1 mb-0">$8695</h3>
+												<h3 class="font-large-1 mb-0"><i class="fa fa-rupee"></i><%=TotalEarning %></h3>
 												<span>Total Earning</span>
 											</div>
 											<div class="media-right white text-right">
@@ -261,7 +263,7 @@
 							<div class="card">
 								<div class="card-header">
 									<h4 class="card-title mb-0">Developers & Admins</h4>
-									
+
 								</div>
 								<div class="card-body">
 									<div class="card-block">
@@ -271,7 +273,7 @@
 												src="app-assets/img/portrait/small/avatar-s-12.png">
 											</a>
 											<div class="media-body">
-												<h4 class="font-medium-1 mt-1 mb-0">Payal </h4>
+												<h4 class="font-medium-1 mt-1 mb-0">Payal</h4>
 												<p class="text-muted font-small-3">Team Leader</p>
 											</div>
 											<div class="mt-1">
@@ -290,7 +292,7 @@
 												src="app-assets/img/portrait/small/avatar-s-6.png">
 											</a>
 											<div class="media-body">
-												<h4 class="font-medium-1 mt-1 mb-0">Pallavi  </h4>
+												<h4 class="font-medium-1 mt-1 mb-0">Pallavi</h4>
 												<p class="text-muted font-small-3">HTML Developer</p>
 											</div>
 											<div class="mt-1">
@@ -360,8 +362,8 @@
 
 											</div>
 										</div>
-										
-										
+
+
 									</div>
 								</div>
 							</div>
@@ -426,9 +428,10 @@
 
 			<footer class="footer footer-static footer-light">
 				<p class="clearfix text-muted text-sm-center px-2">
-					<span>Copyright &copy; 2018
-					 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent"
-						id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights
+					<span>Copyright &copy; 2018 <a
+						href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent"
+						id="pixinventLink" target="_blank"
+						class="text-bold-800 primary darken-2">PIXINVENT </a>, All rights
 						reserved.
 					</span>
 				</p>
@@ -464,7 +467,8 @@
 							class="gradient-king-yna d-block rounded-circle"></span>
 					</div>
 					<div class="col">
-						<span style="width: 20px; height: 20px;" data-bg-color="ibiza-sunset"
+						<span style="width: 20px; height: 20px;"
+							data-bg-color="ibiza-sunset"
 							class="gradient-ibiza-sunset d-block rounded-circle"></span>
 					</div>
 					<div class="col">
@@ -593,40 +597,44 @@
 			</div>
 
 
- <!--  modal start -->
+			<!--  modal start -->
 
- <!-- Modal -->
-<div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="welcomeModalLabel">Welcome</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       
-        <p>Hello <%= session.getAttribute("username") %>, welcome to your homepage.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+			<!-- Modal -->
+			<div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog"
+				aria-labelledby="welcomeModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="welcomeModalLabel">Welcome</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
 
-<script>
-  $(document).ready(function() {
-    $('#welcomeModal').modal('show');
-  });
-</script>
- 
+							<p>
+								Hello
+								<%=session.getAttribute("username")%>, welcome to your
+								homepage.
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
-<!--  modal end  -->
+			<script>
+				$(document).ready(function() {
+					$('#welcomeModal').modal('show');
+				});
+			</script>
 
 
-
+			<!--  modal end  -->
 
 
 

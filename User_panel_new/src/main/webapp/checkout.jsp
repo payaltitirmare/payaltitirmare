@@ -1,19 +1,57 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
+<%@page import="com.codeo.shop.Dao.CustomerDao"%>
+<%@page import="java.util.List"%>
+<%@page import="com.codeo.shop.entity.Customer"%>
+
+
+<%
+HttpSession session4 = request.getSession();
+String user = (String) session4.getAttribute("usertype");
+if (user == null) {
+
+	session4.setAttribute("message", "You are not logged in, Logged in first");
+	response.sendRedirect("loginfrom.jsp");
+	return;
+}
+int userId= (int) session4.getAttribute("userid");
+String incompleteinfo=(String)session4.getAttribute("incompleteinfo");
+//int userId=Integer.parseInt(uId);
+%>
+
+
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Ogani Template">
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Ogani | Template</title>
+<title>Checkout</title>
 
 <!-- Google Font -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
 	rel="stylesheet">
 
+
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+	integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+	integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+	integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+	crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Css Styles -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -23,65 +61,28 @@
 <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
+
+
 </head>
 
-<body>
+<body <%if(incompleteinfo!=null){
+	if(incompleteinfo.equals("No address")){
+		%>
+		  onload="addressrErrorPopUp()"
+		<%session4.removeAttribute("incompleteinfo"); }
+	else{
+	%>
+  onload="msgErrorPopUp()"
+<%session4.removeAttribute("incompleteinfo"); }} %> >
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
 	<jsp:include page="header.jsp" />
-
-	<!-- Hero Section Begin -->
-	<section class="hero hero-normal">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3">
-					<div class="hero__categories">
-						<div class="hero__categories__all">
-							<i class="fa fa-bars"></i> <span>All departments</span>
-						</div>
-						<ul>
-							<li><a href="#">Fresh Meat</a></li>
-							<li><a href="#">Vegetables</a></li>
-							<li><a href="#">Fruit & Nut Gifts</a></li>
-							<li><a href="#">Fresh Berries</a></li>
-							<li><a href="#">Ocean Foods</a></li>
-							<li><a href="#">Butter & Eggs</a></li>
-							<li><a href="#">Fastfood</a></li>
-							<li><a href="#">Fresh Onion</a></li>
-							<li><a href="#">Papayaya & Crisps</a></li>
-							<li><a href="#">Oatmeal</a></li>
-							<li><a href="#">Fresh Bananas</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-9">
-					<div class="hero__search">
-						<div class="hero__search__form">
-							<form action="#">
-								<div class="hero__search__categories">
-									All Categories <span class="arrow_carrot-down"></span>
-								</div>
-								<input type="text" placeholder="What do yo u need?">
-								<button type="submit" class="site-btn">SEARCH</button>
-							</form>
-						</div>
-						<div class="hero__search__phone">
-							<div class="hero__search__phone__icon">
-								<i class="fa fa-phone"></i>
-							</div>
-							<div class="hero__search__phone__text">
-								<h5>+65 11.188.888</h5>
-								<span>support 24/7 time</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Hero Section End -->
+	<jsp:include page="CommonModal.jsp" />
+	
+	
+	
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg" data-setbg="img/Name-bg.jpg">
@@ -113,145 +114,196 @@
 			</div>
 			<div class="checkout__form">
 				<h4>Billing Details</h4>
-				<form action="#">
+				<form method="post" action="orderPlace" id="orderPlaceAlert">
 					<div class="row">
-						<div class="col-lg-8 col-md-6">
-							<div class="row">
-								<div class="col-lg-6">
-									<div class="checkout__input">
-										<p>
-											Fist Name<span>*</span>
-										</p>
-										<input type="text">
+						<div class=" col-md-6">
+
+							<%
+							CustomerDao cd = new CustomerDao();
+							HttpSession hs = request.getSession();
+							int u_id = (int) hs.getAttribute("userid");
+							List<Customer> address = cd.getAddress(u_id);
+							%>
+
+							<!-- Address Show Started -->
+
+							<div class="card mb-3">
+								<div class="card-body">
+									<h4 class="text-dark">Select Your Address</h4>
+									<%if(address.size()!=0){
+									
+									for (Customer a : address) {
+									%>
+									<div class="row checkout-address-row">
+										<div class="col-2 col-md-1">
+											<div class="radio radio-success">
+												<input type="radio" name="address_id"
+													value="<%=a.getC_id()%>" id="addressId"
+													aria-invalid="false"  /> 
+											</div>
+											<span class="badge badge-primary"></span>
+										</div>
+										<div class="col-md-11 col-10">
+
+											<div>
+												Mr
+												<%=a.getC_name()%>
+												(<%=a.getC_mobno()%>)
+											</div>
+											<hr class="mt-1 mb-1">
+											<%=a.getC_adderess()%>
+											, <br>
+
+											<%=a.getC_landmark() + " " + a.getC_city() + " " + a.getC_pincode()%>
+											<a href="EditAddress?id=1994"
+												class="badge bg-danger pull-right">Edit</a>
+
+										</div>
+									</div>
+									<hr size="8" width="100%" color="red">
+									<%
+									}
+									
+									}else{
+										%>
+										<h2 style="color:red;">PLEASE PUT YOUR ADDRESS!</h2>
+										<%
+									}
+									%>
+
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="text-center mt-5">
+												<button type="button" class="btn btn-primary"
+													data-bs-toggle="modal" data-bs-target="#AddNewAddress">
+													<i class="fa fa-plus-circle"></i> Add New Address
+												</button>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div class="col-lg-6">
-									<div class="checkout__input">
-										<p>
-											Last Name<span>*</span>
-										</p>
-										<input type="text">
-									</div>
-								</div>
-							</div>
-							<div class="checkout__input">
-								<p>
-									Country<span>*</span>
-								</p>
-								<input type="text">
-							</div>
-							<div class="checkout__input">
-								<p>
-									Address<span>*</span>
-								</p>
-								<input type="text" placeholder="Street Address"
-									class="checkout__input__add"> <input type="text"
-									placeholder="Apartment, suite, unite ect (optinal)">
-							</div>
-							<div class="checkout__input">
-								<p>
-									Town/City<span>*</span>
-								</p>
-								<input type="text">
-							</div>
-							<div class="checkout__input">
-								<p>
-									Country/State<span>*</span>
-								</p>
-								<input type="text">
-							</div>
-							<div class="checkout__input">
-								<p>
-									Postcode / ZIP<span>*</span>
-								</p>
-								<input type="text">
-							</div>
-							<div class="row">
-								<div class="col-lg-6">
-									<div class="checkout__input">
-										<p>
-											Phone<span>*</span>
-										</p>
-										<input type="text">
-									</div>
-								</div>
-								<div class="col-lg-6">
-									<div class="checkout__input">
-										<p>
-											Email<span>*</span>
-										</p>
-										<input type="text">
-									</div>
-								</div>
-							</div>
-							<div class="checkout__input__checkbox">
-								<label for="acc"> Create an account? <input
-									type="checkbox" id="acc"> <span class="checkmark"></span>
-								</label>
-							</div>
-							<p>Create an account by entering the information below. If
-								you are a returning customer please login at the top of the page</p>
-							<div class="checkout__input">
-								<p>
-									Account Password<span>*</span>
-								</p>
-								<input type="text">
-							</div>
-							<div class="checkout__input__checkbox">
-								<label for="diff-acc"> Ship to a different address? <input
-									type="checkbox" id="diff-acc"> <span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="checkout__input">
-								<p>
-									Order notes<span>*</span>
-								</p>
-								<input type="text"
-									placeholder="Notes about your order, e.g. special notes for delivery.">
 							</div>
 						</div>
-						<div class="col-lg-4 col-md-6">
+
+
+						<!-- Address Show Ended -->
+
+						<!-- -Order Form Started -->
+						<div style="margin-left: 100px;" class="col-lg-4 col-md-6">
 							<div class="checkout__order">
 								<h4>Your Order</h4>
-								<div class="checkout__order__products">
-									Products <span>Total</span>
+								<div class="check">
+									<!-- data comming from js file -->
+
 								</div>
-								<ul>
-									<li>Vegetable’s Package <span>$75.99</span></li>
-									<li>Fresh Vegetable <span>$151.99</span></li>
-									<li>Organic Bananas <span>$53.99</span></li>
-								</ul>
-								<div class="checkout__order__subtotal">
-									Subtotal <span>$750.99</span>
+
+
+								<div class="checkout__order__subtotal  ">
+									Subtotal <span class="totalOrder"></span>
+								</div>
+								<div class="checkout__order__total ">
+									Delivery Charges <span style="color: black;" class="charges"></span>
+								</div>
+								<div class="checkout__order__total" >
+									Total <span class="totalPrice" ></span>
+								</div>
+
+								<h4 style="Background: white; text-align: center;"><label for="paymentMode" >Make</label>
+									Payment</h4>
+
+
+								<div class="checkout__order__total">
+									<div class="radio radio-success">
+										<input type="radio" name="payment" id="paymentMode" value="Cash On Delivery"
+											aria-invalid="false" /> <label for="selectAddress0"></label>
+
+										<span style="color: black;">CASH ON DELIVERY</span>
+									</div>
 								</div>
 								<div class="checkout__order__total">
-									Total <span>$750.99</span>
+									<div class="radio radio-success" >
+										<input type="radio" name="payment" id="paymentMode" value="net banking"
+											aria-invalid="false" onclick="paymentStart()"  /> <label for="selectAddress0"></label>
+
+										<span  >NET BANKING</span>
+									</div>
 								</div>
-								<div class="checkout__input__checkbox">
-									<label for="acc-or"> Create an account? <input
-										type="checkbox" id="acc-or"> <span class="checkmark"></span>
-									</label>
-								</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do
-									eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								<div class="checkout__input__checkbox">
-									<label for="payment"> Check Payment <input
-										type="checkbox" id="payment"> <span class="checkmark"></span>
-									</label>
-								</div>
-								<div class="checkout__input__checkbox">
-									<label for="paypal"> Paypal <input type="checkbox"
-										id="paypal"> <span class="checkmark"></span>
-									</label>
-								</div>
-								<button type="submit" class="site-btn">PLACE ORDER</button>
+								<input type="hidden" name="user_id" value="<%=userId%>">
+								<input type="hidden" id="totalPrice" name="tprice">
+								<a ><button type="submit"  class="site-btn"  id="payButton" onclick="CreateOrderID()"   >PLACE ORDER</button></a>
 							</div>
-						</div>
+	
+						
+							<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_live_nWvxkcXxFc6NZ6", // Enter the Key ID generated from the Dashboard
+    "amount": "1", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Acme Corp",
+    "description": "Test Transaction",
+    "image": "https://examp
+    "order_id": "order_IluGWxBm9U8zJ8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature)
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9000090000"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+		<%
+						
+						String cartlength=(String)session.getAttribute("cart");
+						
+						for(int i=1;i<=Integer.parseInt(cartlength);  i++){ %>
+						<input type="hidden" id="productIdO<%=i %>" type="checkbox"  name="productIdO">
+						<input type="hidden" id="productNameO<%=i %>" type="checkbox"  name="productNameO">
+						<input type="hidden" id="productQuantityO<%=i %>" type="checkbox"  name="productQuantityO">
+						<input type="hidden" id="productPriceO<%=i %>" type="checkbox"  name="productPriceO">
+						<%} %>
+						
+					</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</section>
+
 	<!-- Checkout Section End -->
 
 	<jsp:include page="footer.html" />
@@ -265,9 +317,10 @@
 	<script src="js/mixitup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
-
-
-
+	<script type="text/javascript" src="js/CommonScript.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
+	
 </body>
 
 </html>

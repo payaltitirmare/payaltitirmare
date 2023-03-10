@@ -5,63 +5,25 @@
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
 	<servlet>
-		<servlet-name>LogoutServlet</servlet-name>
-		<display-name>LogoutServlet</display-name>
+		<servlet-name>ForgotPassword</servlet-name>
+		<display-name>ForgotPassword</display-name>
 		<description></description>
-		<servlet-class>com.codeo.shop.controller.LogoutServlet</servlet-class>
+		<servlet-class>com.codeo.shop.controller.ForgotPassword</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>AddToCartServlet</servlet-name>
-		<display-name>AddToCartServlet</display-name>
+		<servlet-name>OrderCreation</servlet-name>
+		<display-name>OrderCreation</display-name>
 		<description></description>
-		<servlet-class>com.codeo.shop.controller.AddToCartServlet</servlet-class>
+		<servlet-class>com.codeo.shop.controller.OrderCreation</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>Cart</servlet-name>
-		<display-name>Cart</display-name>
-		<description></description>
-		<servlet-class>com.codeo.shop.entity.Cart</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>QuantityIncDecServlet</servlet-name>
-		<display-name>QuantityIncDecServlet</display-name>
-		<description></description>
-		<servlet-class>com.codeo.shop.controller.QuantityIncDecServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>CountData</servlet-name>
-		<display-name>CountData</display-name>
-		<description></description>
-		<servlet-class>com.codeo.shop.controller.CountData</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>BannerServlet</servlet-name>
-		<display-name>BannerServlet</display-name>
-		<description></description>
-		<servlet-class>com.codeo.shop.controller.BannerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LogoutServlet</servlet-name>
-		<url-pattern>/LogoutServlet</url-pattern>
+		<servlet-mapping>
+		<servlet-name>ForgotPassword</servlet-name>
+		<url-pattern>/ForgotPassword</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AddToCartServlet</servlet-name>
-		<url-pattern>/AddToCartServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Cart</servlet-name>
-		<url-pattern>/Cart</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>QuantityIncDecServlet</servlet-name>
-		<url-pattern>/QuantityIncDecServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>CountData</servlet-name>
-		<url-pattern>/CountData</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>BannerServlet</servlet-name>
-		<url-pattern>/BannerServlet</url-pattern>
-	</servlet-mapping>
+		<servlet-mapping>
+			<servlet-name>OrderCreation</servlet-name>
+			<url-pattern>/OrderCreation</url-pattern>
+		</servlet-mapping>
+
+
 </web-app>

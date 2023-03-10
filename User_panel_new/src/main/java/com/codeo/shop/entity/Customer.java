@@ -1,7 +1,6 @@
 package com.codeo.shop.entity;
 
 public class Customer {
-
 	String c_id = null;    
 	 String c_name= null;
 	 String c_mobno = null;
@@ -99,4 +98,5 @@ public class Customer {
 	 
 
 	
+
 }
