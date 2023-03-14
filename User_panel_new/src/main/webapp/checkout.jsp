@@ -205,11 +205,11 @@ String incompleteinfo=(String)session4.getAttribute("incompleteinfo");
 								<div class="checkout__order__total ">
 									Delivery Charges <span style="color: black;" class="charges"></span>
 								</div>
-								<div class="checkout__order__total" >
-									Total <span class="totalPrice" ></span>
+								<div class="checkout__order__total">
+									Total <span class="totalPrice"></span>
 								</div>
 
-								<h4 style="Background: white; text-align: center;"><label for="paymentMode" >Make</label>
+								<h4 style="Background: white; text-align: center;"><label for="paymentMode">Make</label>
 									Payment</h4>
 
 
@@ -222,73 +222,23 @@ String incompleteinfo=(String)session4.getAttribute("incompleteinfo");
 									</div>
 								</div>
 								<div class="checkout__order__total">
-									<div class="radio radio-success" >
+									<div class="radio radio-success">
 										<input type="radio" name="payment" id="paymentMode" value="net banking"
-											aria-invalid="false" onclick="paymentStart()"  /> <label for="selectAddress0"></label>
+											aria-invalid="false" /> <label for="selectAddress0"></label>
 
-										<span  >NET BANKING</span>
+										<span>NET BANKING</span>
 									</div>
 								</div>
 								<input type="hidden" name="user_id" value="<%=userId%>">
 								<input type="hidden" id="totalPrice" name="tprice">
-								<a ><button type="submit"  class="site-btn"  id="payButton" onclick="CreateOrderID()"   >PLACE ORDER</button></a>
+								<a ><button type="submit"  class="site-btn">PLACE ORDER</button></a>
 							</div>
-	
+
 						
-							<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-var options = {
-    "key": "rzp_live_nWvxkcXxFc6NZ6", // Enter the Key ID generated from the Dashboard
-    "amount": "1", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Acme Corp",
-    "description": "Test Transaction",
-    "image": "https://examp
-    "order_id": "order_IluGWxBm9U8zJ8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "handler": function (response){
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature)
-    },
-    "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com",
-        "contact": "9000090000"
-    },
-    "notes": {
-        "address": "Razorpay Corporate Office"
-    },
-    "theme": {
-        "color": "#3399cc"
-    }
-};
-var rzp1 = new Razorpay(options);
-rzp1.on('payment.failed', function (response){
-        alert(response.error.code);
-        alert(response.error.description);
-        alert(response.error.source);
-        alert(response.error.step);
-        alert(response.error.reason);
-        alert(response.error.metadata.order_id);
-        alert(response.error.metadata.payment_id);
-});
-document.getElementById('rzp-button1').onclick = function(e){
-    rzp1.open();
-    e.preventDefault();
-}
-</script>
-							
-							
-							
-							
-							
-							
-							
-							
-							
-		<%
+						<%
 						
 						String cartlength=(String)session.getAttribute("cart");
+						
 						
 						for(int i=1;i<=Integer.parseInt(cartlength);  i++){ %>
 						<input type="hidden" id="productIdO<%=i %>" type="checkbox"  name="productIdO">
@@ -296,14 +246,12 @@ document.getElementById('rzp-button1').onclick = function(e){
 						<input type="hidden" id="productQuantityO<%=i %>" type="checkbox"  name="productQuantityO">
 						<input type="hidden" id="productPriceO<%=i %>" type="checkbox"  name="productPriceO">
 						<%} %>
-						
 					</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</section>
-
 	<!-- Checkout Section End -->
 
 	<jsp:include page="footer.html" />
@@ -318,9 +266,8 @@ document.getElementById('rzp-button1').onclick = function(e){
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript" src="js/CommonScript.js"></script>
+	<script type="text/javascript" src="js/Vsalidation.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	
-	
 </body>
 
 </html>

@@ -40,6 +40,18 @@ int TotalEarning=(int)total_earning;
 
 <!-- Mirrored from pixinvent.com/apex-angular-4-bootstrap-admin-template/html-demo-2/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Apr 2018 07:11:20 GMT -->
 <head>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+	crossorigin="anonymous"></script>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -49,7 +61,7 @@ int TotalEarning=(int)total_earning;
 <meta name="keywords"
 	content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="PIXINVENT">
-<title>Dashboard1 - Apex responsive bootstrap 4 admin template</title>
+<title>Dashboard</title>
 <link rel="apple-touch-icon" sizes="60x60"
 	href="app-assets/img/ico/apple-icon-60.html">
 <link rel="apple-touch-icon" sizes="76x76"
@@ -110,7 +122,7 @@ int TotalEarning=(int)total_earning;
 					<div class="row">
 						<div class="col-xl-3 col-lg-6 col-md-6 col-12">
 							<div class="card gradient-blackberry">
-								<div class="card-body">
+								<div  onclick="location.href='UserList.jsp';" style="cursor:pointer;" class="card-body">
 									<div class="card-block pt-2 pb-0">
 										<div class="media">
 											<div class="media-body white text-left">
@@ -130,7 +142,7 @@ int TotalEarning=(int)total_earning;
 						</div>
 						<div class="col-xl-3 col-lg-6 col-md-6 col-12">
 							<div class="card gradient-ibiza-sunset">
-								<div class="card-body">
+								<div  onclick="location.href='ViewOrderAdmin.jsp';" style="cursor:pointer;" class="card-body">
 									<div class="card-block pt-2 pb-0">
 										<div class="media">
 											<div class="media-body white text-left">

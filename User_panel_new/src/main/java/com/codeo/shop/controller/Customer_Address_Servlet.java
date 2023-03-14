@@ -57,6 +57,7 @@ public class Customer_Address_Servlet extends HttpServlet {
 		 custo_pincode = request.getParameter("pincode");
 		
 		 
+		 
 		 customer = new Customer(custo_id, custo_name, custo_mobno, custo_adderess, custo_email, custo_landmark, custo_AddressType, custo_city, custo_pincode, u_id);	
 		
 		

@@ -55,8 +55,8 @@ List<Order> orderlist = mod.getAllOrderList();
 							<div class="col-sm-12">
 								<div class="card">
 									<div class="card-body">
-										<div class="card-block">
-											<table class="table table-responsive-md text-center ">
+										<div style="margin:40px;" class="card-block">
+											<table style="margin-top: 50px;" class="table table-responsive-md text-center ">
 												<thead>
 													<tr>
 														<th>Sr.No.</th>
@@ -71,28 +71,48 @@ List<Order> orderlist = mod.getAllOrderList();
 					                       			Date date=order.getDate();
 														i++; %>
 												<tr>
-													<td><%=i %></td>
+													<td><%=i %> <% if(order.getseen().equals("No")){%> <span style="color:red; font-size:80%;">(new)</span><%} %></td>
 													<td><%=order.getDate()%></td>
 													<%List<Customer> C_Address_details = mod.getAddressDetailByID(order.getAddressId());
 						if(C_Address_details.size()==0){%>
 						<td> Null </td>
 						<%}
 						for(Customer custo:C_Address_details){
-						
-						%>
-						<td><%=custo.getC_name() %></td><%} %>
+							
+							%>
+							<td><%=custo.getC_name() %></td><%} %>
 													<td><a href="OrderDetailsAdmin.jsp?orderId=<%=order.getOrderId()%>&addressId=<%=order.getAddressId() %>" type="button" style="color:white; font-family:Serif; background: blue;" class="btn btn-primary btn-sm">DATAILS</a></td>
+												    
+												   <%if(order.getStatus().equals("Approved")){%>
 												    <td><div  class="btn-group">
+															<a style="background: #00FF00;"  class="btn btn-primary">Approved</a>
+															</div>
+													</td>
+													  
+												  <%  } else if(order.getStatus().equals("Rejected")){%>
+												   <td><div  class="btn-group">
+															<a style="background: red; color:white; cursor:none;" type="button" class="btn btn-primary">Rejected</a>
+															
+														</div>
+													</td>
+													   
+												  <%  }else{%>
+												   <td><div  class="btn-group">
 															<button style="background: orange;" type="button" class="btn btn-primary">WAITING</button>
 															<button style="background: orange;" type="button"
 																class="btn btn-primary dropdown-toggle dropdown-toggle-split"
 																data-toggle="dropdown"></button>
 															<div class="dropdown-menu">
-																<a style="background: #00FF00;" class="dropdown-item" href="StatusServlet?Action=ApproveOrder&O_Id=<%=order.getOrderId()%>">APPROVE</a>
-																 <a	style="background: red; " class="dropdown-item" href="StatusServlet?Action=RejectOrder&O_Id=<%=order.getOrderId()%>">REJECT</a>
+																<a style="background: #00FF00;" class="dropdown-item" href="Status_Servlet?Action=approve&O_Id=<%=order.getOrderId()%>">APPROVE</a>
+																 <a	style="background: red; " class="dropdown-item"  href="Status_Servlet?Action=reject&O_Id=<%=order.getOrderId()%>">REJECT</a>
 															</div>
 														</div>
 													</td>
+													   
+												   <% } %>
+												    
+												    
+												    
 
 												</tr>
 

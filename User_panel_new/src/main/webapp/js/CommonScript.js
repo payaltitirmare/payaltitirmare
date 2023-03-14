@@ -393,34 +393,19 @@ function msgErrorPopUp(){
 	swal("Oops!", "Please select Your Payment Mode!", "error");
 	}
 
-//==================demo============
 
-
-
-//function sweetalert(){
-	//var a = $('#addressId').val();
-//	console.log("length ",a.length);
-//	swal("Incomplete information!", "Please put your address!", "error");
-//}
-
-
-// first request to server to create order
-
-const paymentStart=()=>{
-	
- console.log("payment started..");
- let amount = $(".totalPrice").val();
- console.log(amount);	
- 
-}
-
-
-
-
-
-
-
-
-
-	
-	
+//========================Download Invoice===============
+  function downloadInvoice() {
+            html2canvas($('#invoiceDownload')[0], {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("invoice.pdf");
+                }
+            });
+        }

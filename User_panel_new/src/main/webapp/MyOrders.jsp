@@ -53,11 +53,12 @@
 
 <%
 HttpSession session4 = request.getSession();
-int userId= (int) session4.getAttribute("userid");
-MyOrderDao mod=new MyOrderDao();
+int userId = (int) session4.getAttribute("userid");
+MyOrderDao mod = new MyOrderDao();
 List<Order> orderlist = mod.getAllOrderListByUID(userId);
-String orderSuccess=(String) session4.getAttribute("orderSuccess");
-System.out.println(orderSuccess);%>
+String orderSuccess = (String) session4.getAttribute("orderSuccess");
+
+%>
 
 
 
@@ -121,9 +122,33 @@ System.out.println(orderSuccess);%>
 						
 						%>
 						<td><%=custo.getC_name() %></td><%} %>
-						<td><button type="button" style="background: #65fe08;" class="btn btn-warning btn-sm">APPROVED</button></td>
+						
+						 <%if(order.getStatus().equals("Approved")){%>
+												    <td><div  class="btn-group">
+															<a style="background: #00FF00; "  class="btn btn-primary">Approved</a>
+															</div>
+													</td>
+													  
+												  <%  } else if(order.getStatus().equals("Rejected")){%>
+												   <td><div  class="btn-group">
+															<a style="background: red; color:white;" type="button" class="btn btn-primary">Rejected</a>
+															
+														</div>
+													</td>
+													   
+												  <%  }else{%>
+												   <td><div  class="btn-group">
+															<button style="background: orange;" type="button" class="btn btn-primary">WAITING</button>
+															
+														</div>
+													</td>
+													   
+												   <% } %>
+						
+						
+						
 						<td><a href="OrderDetails.jsp?orderId=<%=order.getOrderId()%>&addressId=<%=order.getAddressId() %>" type="button" style="color:white;" class="btn btn-primary btn-sm">DATAILS</a></td>
-						<td><button type="button" class="btn btn-danger btn-sm">DOWNLOAD</button></td>
+						<td><a href="Invoice.jsp?orderId=<%=order.getOrderId()%>&addressId=<%=order.getAddressId() %>" type="button"  class="btn btn-danger btn-sm">DOWNLOAD</a></td>
 					<%} %>
 					
 					

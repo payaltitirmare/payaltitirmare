@@ -2,6 +2,7 @@
 
 <%@page import="java.util.*"%>
 <%@page import="com.codeo.shop.dbutil.ConnectionProvider"%>
+<%@page import="com.codeo.shop.Dao.UserDaoImpl"%>
 <%@page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
@@ -127,8 +128,8 @@ input, button, select, optgroup, textarea {
 	<!-- My Profile modal Start-->
 
 
-	<!--My Profile Modal -->
-	<div class="modal fade" id="MyProfile" tabindex="-1"
+	<!--My Profile Modal-user -->
+	<div class="modal fade" id="UserProfile" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -142,68 +143,73 @@ input, button, select, optgroup, textarea {
 						<section style="background-color: #eee;">
 
 							<div class="card mb-4">
+							<%
+									int user_id = (int) session2.getAttribute("userid");
+							UserDaoImpl udi=new UserDaoImpl();
+							ResultSet rs=udi.getUserbyId(user_id);
+							
+																		while (rs.next()) {
+										String User_MoNo = String.valueOf(rs.getString("user_mobno"));
+									%>
+							<form action="edit_user?id=<%=rs.getInt("user_id")%>" method="post">
 								<div>
-
+									
 									<div class="card-body text-center" style="text-align: center;">
 										<img src="img/hero/icon.png" alt="avatar"
 											class="rounded-circle img-fluid" style="width: 150px;">
 									</div>
 
-									<%
-									int user_id = (int) session2.getAttribute("userid");
-									String select_product = "select * from user_registration where user_id=" + user_id;
-									Connection con = ConnectionProvider.getconnection();
-									Statement stmt = con.createStatement();
-									ResultSet rs = stmt.executeQuery(select_product);
-
-									while (rs.next()) {
-										String User_MoNo = String.valueOf(rs.getString("user_mobno"));
-									%>
+									
 									<table class="table table-user-information">
-										<tbody>
-											<tr>
-												<td><strong> <span
-														class="glyphicon glyphicon-asterisk text-primary"></span>
-														Full Name
-												</strong></td>
-												<td class="text-primary">: <%=rs.getString("user_name")%></td>
-											</tr>
-											<tr>
-												<td><strong> <span
-														class="glyphicon glyphicon-asterisk text-primary"></span>
-														Contact Details
-												</strong></td>
-												<td class="text-primary">:<%=User_MoNo%></td>
-											</tr>
-											<tr>
-												<td><strong> <span
-														class="glyphicon glyphicon-asterisk text-primary"></span>
-														Email Id
-												</strong></td>
-												<td class="text-primary">: <%=rs.getString("user_emailid")%></td>
-											</tr>
-											<tr>
-												<td><strong> <span
-														class="glyphicon glyphicon-asterisk text-primary"></span>
-														Addresss
-												</strong></td>
-												<td class="text-primary">: <%=rs.getString("user_adderess")%></td>
-											</tr>
-										</tbody>
-									</table>
+											<tbody>
+												<tr>
+													<td><strong> <span
+															class="glyphicon glyphicon-asterisk text-primary"></span>
+															Full Name
+													</strong></td>
 
+													<td class="text-primary">: <input type="text"
+														name="name" value="<%=rs.getString("user_name")%>" /></td>
+												</tr>
+												<tr>
+													<td><strong> <span
+															class="glyphicon glyphicon-asterisk text-primary"></span>
+															Contact Details
+													</strong></td>
+													<td class="text-primary">: <input type="text"
+														name="Mobile" value="<%=User_MoNo%>" /></td>
+												</tr>
+												<tr>
+													<td><strong> <span
+															class="glyphicon glyphicon-asterisk text-primary"></span>
+															Email Id
+													</strong></td>
+													<td class="">: 
+													<%=rs.getString("user_emailid")%></td>
+												</tr>
+												<tr>
+													<td><strong> <span
+															class="glyphicon glyphicon-asterisk text-primary"></span>
+															Addresss
+													</strong></td>
+													<td class="text-primary">: <input type="text"
+														name="address" value="<%=rs.getString("user_adderess")%>" /></td>
+												</tr>
+											</tbody>
+										</table>
 
 
 
 								</div>
+								<input type="hidden" value="user" name="page"> 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary"
- data-toggle="modal" data-target="#UpdateProfile">EditInfo</button>
-									<button  id='closeModal' type="button" class="btn btn-danger"
+								<button  id='closeModal' type="button" class="btn btn-danger"
 										data-bs-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">Update</button>
+									
 								</div>
 
-
+								</form>
 							</div>
 						</section>
 					</div>
@@ -219,15 +225,15 @@ input, button, select, optgroup, textarea {
 
 
 
-	<!--Update Profile Modal -->
-	<div class="modal fade" id="UpdateProfile" tabindex="-1"
+	<!-- Profile Modal-admin -->
+	<div class="modal fade" id="AdminProfile" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h3 class="my_profile" id="exampleModalLabel">Update Profile
 						Info</h3>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
+					<button type="button" class="btn-close" data-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
@@ -252,7 +258,7 @@ input, button, select, optgroup, textarea {
 													</strong></td>
 
 													<td class="text-primary">: <input type="text"
-														name="name" value="<%=rs.getString("user_name")%>"></td>
+														name="name" value="<%=rs.getString("user_name")%>" /></td>
 												</tr>
 												<tr>
 													<td><strong> <span
@@ -260,15 +266,14 @@ input, button, select, optgroup, textarea {
 															Contact Details
 													</strong></td>
 													<td class="text-primary">: <input type="text"
-														name="Mobile" value="<%=User_MoNo%>"></td>
+														name="Mobile" value="<%=User_MoNo%>" /></td>
 												</tr>
 												<tr>
 													<td><strong> <span
 															class="glyphicon glyphicon-asterisk text-primary"></span>
 															Email Id
 													</strong></td>
-													<td class="text-primary">: <input type="text"
-														name="email" value=" <%=rs.getString("user_emailid")%>"></td>
+													<td class="text-primary">:<%=rs.getString("user_emailid")%>
 												</tr>
 												<tr>
 													<td><strong> <span
@@ -276,7 +281,7 @@ input, button, select, optgroup, textarea {
 															Addresss
 													</strong></td>
 													<td class="text-primary">: <input type="text"
-														name="address" value="  <%=rs.getString("user_adderess")%>"></td>
+														name="address" value="  <%=rs.getString("user_adderess")%>" /></td>
 												</tr>
 											</tbody>
 										</table>
@@ -287,9 +292,9 @@ input, button, select, optgroup, textarea {
 										%>
 
 									</div>
+									<input type="hidden" value="Admin" name="page"> 
 									<div class="modal-footer">
-
-										
+										<button  id='closeModal' type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 										<button type="submit" class="btn btn-primary" >Update </button>
 										
 									</div>
@@ -306,6 +311,8 @@ input, button, select, optgroup, textarea {
 	<!-- My Profile end -->
 
 
+
+
 	<!-- Set address during making orders modal start -->
 
 
@@ -320,7 +327,7 @@ input, button, select, optgroup, textarea {
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form class="addressForm"
+					<form class="addressForm" id="validAddress" onsubmit="return validAddress()"
 						action="SaveAddress?user_id=<%=user_id%>" method="post">
 						<input type="hidden" name="_token"
 							value="7izNrBqYjX16Icbzz1Vn8FgvFZk2Gjn6Ty3VcVjT"> <input
@@ -335,9 +342,10 @@ input, button, select, optgroup, textarea {
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Contact</label> <input type="text" name="mobile"
+									<label>Contact</label> <input type="text" name="mobile" id="mobileno"
 										class="form-control"
 										onkeypress="INGENIOUS.numericInput(event)" value="" required>
+										<small id="contact_error" style="color:red; margin-left:10px;" ></small>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -355,7 +363,7 @@ input, button, select, optgroup, textarea {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Landmark</label> <input type="text" name="landmark"
-										class="form-control" value="">
+										class="form-control" value="" required>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -377,9 +385,10 @@ input, button, select, optgroup, textarea {
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>Pincode</label> <input type="text" name="pincode"
+									<label>Pincode</label> <input type="text" id="pincode" name="pincode"
 										class="form-control"
 										onkeypress="INGENIOUS.numericInput(event)" value="" required>
+										<small id="pin_error" style="color:red; text-align:center;" ></small>
 								</div>
 							</div>
 
@@ -433,7 +442,7 @@ input, button, select, optgroup, textarea {
 								<div class="form-group">
 									<label>Contact</label> <input type="text" name="mobile"
 										class="form-control"
-										onkeypress="INGENIOUS.numericInput(event)" value="" required>
+										 value="" required>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -475,7 +484,7 @@ input, button, select, optgroup, textarea {
 								<div class="form-group">
 									<label>Pincode</label> <input type="text" name="pincode"
 										class="form-control"
-										onkeypress="INGENIOUS.numericInput(event)" value="" required>
+										 value="" required>
 								</div>
 							</div>
 
@@ -495,5 +504,6 @@ input, button, select, optgroup, textarea {
 		</div>
 	</div>
 	<!-- Edit address during making orders modal end -->
+
 </body>
 </html>
