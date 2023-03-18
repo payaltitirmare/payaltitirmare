@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class FindPrefix14 {
 
-	
+	// Longest Common Prefix  -- watch video from technosage
 
 	public static void main (String[] args)
 	{
@@ -18,8 +18,11 @@ public class FindPrefix14 {
 	
     public static String longestCommonPrefix(String[] strs) {
         
-    	Arrays.sort(strs);
-        String start = strs[0];
+    	Arrays.sort(strs);  // we sort beacuse if this are sorted then
+    	//in first string common prefix and last string common prefix also occur in middale string common prefix 
+       
+    	
+    	String start = strs[0];
         String end = strs[strs.length-1];
         int idx = 0;
        
