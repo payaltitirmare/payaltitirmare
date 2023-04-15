@@ -6,15 +6,17 @@ import java.sql.SQLException;
 
 public class ConnectionProvider {
 
+	
+	
 	private static final String DriverClassName ="com.mysql.cj.jdbc.Driver" ;
-	private static final String jdbcUrl ="jdbc:mysql://localhost:3306/OnlineElectricalShopee";
+	private static final String jdbcUrl ="jdbc:mysql://localhost:3306/onlineelectricalshopy";
 	static private final String user_name="root";
 	static private final String password="";
 	static Connection con = null;
 	
 	public static  Connection getconnection()
 	{
-	  
+	
 		try {
 			Class.forName(DriverClassName);
 			

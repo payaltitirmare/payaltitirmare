@@ -16,7 +16,7 @@ public class ProductDaoImp implements ProductDao {
 	private static final String insert_Product ="insert into product_operation(prod_name, prod_description, prod_price, prod_discount, prod_quantity,prod_imageName,cid) values(?,?,?,?,?,?,?)";
 	private static final String selct_product ="SELECT * FROM product_operation ";
 	private static final String select_blog ="SELECT * FROM myblogs ";
-    private static final String Edit_product ="select * from product_operation where prod_id=?";
+   // private static final String Edit_product ="select * from product_operation where prod_id=?";
     //private static final String Update_product = "UPDATE product_operation SET name = '"+product.getProd_name()+"', "+ "description = '"+product.getProd_description()+"',  price = '"+product.getProd_price()+"', discount = '"+product.getProd_discount()+"',quantity = '"+product.getProd_quantity()+"',image = '"+product.getProd_imageName()+"' where id="+product.getId();
 	
 	Connection con = null;
@@ -55,7 +55,7 @@ public class ProductDaoImp implements ProductDao {
 					psmt.setInt(7, product.getCid());
 						}
 				
-			    int result = psmt.executeUpdate(); 
+			     psmt.executeUpdate(); 
 				
 				flag = true;
 			} 
@@ -87,7 +87,7 @@ public class ProductDaoImp implements ProductDao {
 	               stmt.setInt(7, product.getCid());
 	               stmt.setInt(8, product.getId());
 
-	            int rowsUpdated= stmt.executeUpdate();
+	            stmt.executeUpdate();
 			    flag = true;
 		}
 		catch(SQLException e) {
@@ -138,7 +138,7 @@ public class ProductDaoImp implements ProductDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	    return true;
+	    return status;
 	}
 	
 	
@@ -366,5 +366,76 @@ public class ProductDaoImp implements ProductDao {
 			
 	}
 
+	
+	@Override
+	public List<Product> getProductBySearch(String ch) 
+	{
+		List<Product> list = new ArrayList<Product>();
+		Product product = null;
+        Connection con = ConnectionProvider.getconnection();
+        String  getproductById = "select * from product_operation where prod_name like ? or prod_price like ? or cid like ?";
+
+try {
+	PreparedStatement psmt = con.prepareStatement(getproductById);
+	psmt.setString(1, "%"+ch+"%");
+	psmt.setString(2, "%"+ch+"%");
+	psmt.setString(3, "%"+ch+"%");
+	
+	ResultSet resultset = psmt.executeQuery();
+	//prod_id, prod_name, prod_description, prod_price, prod_discount, prod_quantity, prod_imageName
+	while(resultset.next())
+	{
+		product = new Product();
+		product.setId(resultset.getInt("prod_id"));
+		product.setProd_name(resultset.getString("prod_name"));
+		product.setProd_description(resultset.getString("prod_description"));
+		product.setProd_price(resultset.getString("prod_price"));
+		product.setProd_discount(resultset.getString("prod_discount"));
+		product.setProd_imageName(resultset.getString("prod_imageName"));
+		product.setCid(resultset.getInt("cid"));
+	
+		list.add(product);
+		//System.out.println("executed ");
+		//System.out.println(list);
+	}
+} 
+catch (SQLException e) {
+	e.printStackTrace();
+}
+	return list;
+		
+}
+	
+	
+	
+	public static List <Product> getProduct()
+	{
+		List<Product> list = new ArrayList<Product>();
+		Product product = null;
+Connection con = ConnectionProvider.getconnection();
+try {
+	Statement statement = con.createStatement();
+	ResultSet resultset =null;
+	resultset =statement.executeQuery(selct_product);
+	//prod_id, prod_name, prod_description, prod_price, prod_discount, prod_quantity, prod_imageName
+	while(resultset.next())
+	{
+		product = new Product();
+		product.setId(resultset.getInt("prod_id"));
+		product.setProd_name(resultset.getString("prod_name"));
+		product.setProd_description(resultset.getString("prod_description"));
+		product.setProd_price(resultset.getString("prod_price"));
+		product.setProd_discount(resultset.getString("prod_discount"));
+		product.setProd_imageName(resultset.getString("prod_imageName"));
+	    list.add(product);
+	    System.out.println("this is executing..");
+	}
+} 
+catch (SQLException e) {
+	e.printStackTrace();
+}
+	return list;
+	}
+  
 	
   }

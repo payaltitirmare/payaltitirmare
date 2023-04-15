@@ -117,15 +117,18 @@ function updateCart(){
 		if(totalPrice>999){
 			$(".charges").html("Rs.00.00");
 			$(".totalPrice").html(`Rs. ${totalPrice}`);
+			 $('#totalPricePay').val(`${totalPrice}`);
 		}else{
 			$(".charges").html("Rs.100");
 			$(".totalPrice").html(`Rs. ${totalPrice+ 100} `);
+			 $('#totalPricePay').val(`${totalPrice+100}`);
 		}
 		
 		$(".totalOrder").html(`Rs. ${totalPrice}`);
 		
 		 $('#totalPrice').val(`${totalPrice}`);
-			
+		 
+		
 		let checkout=`
 			
 					<table>
@@ -153,8 +156,6 @@ function updateCart(){
 			checkout+=`</table>`
 		
 		$(".check").html(checkout);
-		
-		
 	
 	
 	//=============making orders=================
@@ -393,7 +394,7 @@ function msgErrorPopUp(){
 	swal("Oops!", "Please select Your Payment Mode!", "error");
 	}
 
-
+	
 //========================Download Invoice===============
   function downloadInvoice() {
             html2canvas($('#invoiceDownload')[0], {
@@ -409,3 +410,4 @@ function msgErrorPopUp(){
                 }
             });
         }
+

@@ -1,38 +1,53 @@
 package com.codeo.dsa_BinarySearch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Practice {
 
-	public static void main(String[] args) {
-		//Input: strs = ["flower","flow","flight"]
-		//Output: "fl"  longest common prefix 
-		
-		String [] strs= {"flower","flow","flight"};
-		
-		String ans = commonprefix(strs);
+	public static void main(String[] args)
 	
-		System.out.println(ans);
-	  }
-	
-	
-	static String commonprefix (String [] strs)
 	{
-		Arrays.sort(strs);
-		  String s1 = strs[0];
-	        String s2 = strs[strs.length-1];
-	        int idx = 0;
-	        
-	        while(idx < s1.length() && idx < s2.length()){
-	            if(s1.charAt(idx) == s2.charAt(idx)){
-	                idx++;
-	            } else {
-	                break;
-	            }
-	        }
-	        return s1.substring(0, idx);
-	    }
+		System.out.println("enter a number ");
+		Scanner sc = new Scanner(System.in);
 		
+		int num = sc.nextInt();
+		
+		if(num <0)
+		{
+			System.out.println("invalid number please enter again..");
+		}
+		else
+		{
+			Practice pt = new Practice();
+			int fact = pt.getanswer(num);
+			if(fact==num)
+			{
+				System.out.println(num+" is a perfect number....");
+			}
+			else
+			{
+				System.out.println("it is not perfect number");
+			}
+			}
+			
+		}
+		
+	
+	public int getanswer(int num)
+	{
+		int fact=0;
+		for(int i=1; i<num; i++)
+		{
+			if(num%i==0)
+			{
+				fact = fact +i;
+			}
+		}
+		
+		return fact ; 
+	}
+
+	
 }

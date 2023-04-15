@@ -14,6 +14,11 @@ String user_email = (String) session1.getAttribute("UserEmail");
 <%@page import="com.codeo.shop.Dao.CategoryDao"%>
 <%@page import="com.codeo.shop.Dao.ProductDaoImp"%>
 <%@page import="com.codeo.shop.Dao.BannerDao"%>
+<%@page import ="java.sql.Connection" %>
+<%@page import ="java.sql.ResultSet" %>
+<%@page import ="java.sql.SQLException" %>
+<%@page import="java.sql.Statement" %>
+<%@page import=" com.codeo.shop.dbutil.ConnectionProvider" %>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Ogani Template">
@@ -51,13 +56,11 @@ String user_email = (String) session1.getAttribute("UserEmail");
 <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
+<!-- search css -->
+
 </head>
 
 <body>
-
-
-
-		
 
 
 	<!-- Page Preloder -->
@@ -104,29 +107,30 @@ String user_email = (String) session1.getAttribute("UserEmail");
 						</ul>
 					</div>
 				</div>
-				<div class="col-lg-9">
+				<!-- search bar start -->
+				<div class="col-lg-9" >
 					<div class="hero__search">
-						<div class="hero__search__form">
-							<form action="#">
-								<input type="text" placeholder="What do yo u need?">
+					
+						<div class="hero__search__form" >
+						 <form action="Search.jsp" method="post"> 
+								<input type="text" id="search-box" class="form-control" name="ch" placeholder="What do yo u need?" onkeyup="getSuggestions(this.value)">
 								<button type="submit" class="site-btn">SEARCH</button>
-							</form>
+							 </form>  
 						</div>
+						
 						<div class="hero__search__phone">
 							<div class="hero__search__phone__icon">
 								<button data-bs-toggle="modal" data-bs-target="#UserProfile"><img
 									alt="icon" src="img/hero/icon.png"> </button>>
-									
-							</div>
+						</div>
 							
-							
-											
 							<div class="hero__search__phone__text">
 								<h5>WELCOME</h5>
-								<h4 class=" font-weight-bold" style="color: green">
+								<h4 class=" font-weight-bold" style="color: green;">
 									<%
 									if (user_name != null) {
-									%><%=user_name.toUpperCase()%>
+										String word[]=user_name.split(" ");
+									%><%=word[0].toUpperCase()%>
 									<%
 									} else {
 									%>
@@ -137,17 +141,16 @@ String user_email = (String) session1.getAttribute("UserEmail");
 
 							</div>
 						</div>
+                </div>
+    <!--  <div class="search-result">
 
-
-					</div>
-
-
-
+<h1>this is search result</h1>
+<div>ksdjjjjjjjjjjjjjjjjjjjj sssssj asrtttttttttttt avsbbbbbbbbbbb asnb uayytagd aghadsgjha ahiuywueuq qwiuiuqi x agshghhga </div>
+					
+</div>	-->				
 					<!-- -Banner working started -->
 
-
-
-					<%
+  <%
 					BannerDao bannerdao = new BannerDao();
 					List<Banner> banner = bannerdao.getAllBanner(); 
 				
@@ -238,10 +241,7 @@ String user_email = (String) session1.getAttribute("UserEmail");
 	%>
 
 
-
-
-
-	<!-- Categories Section Begin -->
+    <!-- Categories Section Begin -->
 	<section class="categories">
 		<div class="container">
 			<div class="row">
@@ -430,14 +430,10 @@ String user_email = (String) session1.getAttribute("UserEmail");
 	<br>
 
 	
-
-
-
-
-
 	<jsp:include page="footer.html" />
 
 	<!-- Js Plugins -->
+	
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.nice-select.min.js"></script>
@@ -447,6 +443,8 @@ String user_email = (String) session1.getAttribute("UserEmail");
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript" src="js/CommonScript.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 </body>
 

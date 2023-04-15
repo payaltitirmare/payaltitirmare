@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.codeo.shop.Dao.GmailSenderDao;
 import com.codeo.shop.Dao.UserDAO;
 import com.codeo.shop.Dao.UserDaoImpl;
 import com.codeo.shop.entity.User;
@@ -45,17 +46,23 @@ public class RegistrationServlet extends HttpServlet {
 		 user_pass = request.getParameter("pass");
 		 user_type = request.getParameter("user_type");
 		 user = new User(user_name, user_mobno, user_adderess, user_emailid,user_pass,user_type);	
-		 System.out.println(user_name+" "+user_mobno+" "+user_type);
+		 //System.out.println(user_name+" "+user_mobno+" "+user_type);
 		
 		 
 		
 				if(userDAO.insertUser(user)) {
 					
 					HttpSession httpSession = request.getSession();
-					httpSession.setAttribute("message", "Registration Successful       ");
+					httpSession.setAttribute("message", "Registration Successful");
 					response.sendRedirect("loginfrom.jsp");
-					
-					
+					//registration mail
+					GmailSenderDao gsd=new GmailSenderDao();
+					String to = user_emailid;
+					String from = "sunilmaske2001@gmail.com";
+					String subject=user_name;
+					String text="You have successfully register in Online Electrical Shopee " ;
+					gsd.sendEmail(to, from, subject, text);
+				
 					
 					
 		              }
@@ -102,9 +109,6 @@ public class RegistrationServlet extends HttpServlet {
 			} } }
 	
 	private void getSingleUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		//User useredit = new User();
-	    //useredit =userDAO.edituser(id);
 		
 	  //request.setAttribute("user", useredit);
 	  dispatcher = request.getRequestDispatcher("Edit.jsp");

@@ -48,6 +48,13 @@ public class Product {
 		this.prod_imageName =prod_imageName;
 	}
 
+	
+	public Product(int prod_id, String prod_name)
+	{
+		this.id=prod_id;
+		this.prod_name = prod_name;
+	}
+	
 	public String getProd_name() {
 		return prod_name;
 	}

@@ -5,13 +5,10 @@ public class SmallestLetter744 {
 	public static void main(String[] args) {
 		// Find Smallest Letter Greater Than Target
 
-		
 		char[] letters = {'x','x','y','y'};
 	     char target = 'z';
-	    
 	     char ans = nextGreatestLetter( letters, target);
-	     
-	     System.out.println(ans);
+	      System.out.println(ans);
 		
 	}
 	

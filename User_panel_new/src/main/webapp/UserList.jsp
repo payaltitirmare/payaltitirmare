@@ -107,7 +107,6 @@
 							<!--  <td><a  href="edit?id=<c:out value='${user.id}' />"><i class="ft-trash font-medium-3 red"></i></a> ||
                             <a  href="delete?id=<c:out value='${user.id}' />"><i class="ft-edit orange"></i></a> </td>    -->
 
-			                     
                                         	</table> 
 										</div>	
 									</div>

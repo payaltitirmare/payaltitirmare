@@ -6,6 +6,7 @@
 <%@page import="com.codeo.shop.entity.Category"%>
 <%@page import="com.codeo.shop.Dao.CategoryDao"%>
 <%@page import="com.codeo.shop.Dao.ProductDaoImp"%>
+<%@page import="com.codeo.shop.Dao.ProductDao"%>
 <%@page import="com.codeo.shop.Dao.BannerDao"%>
 <head>
 <meta charset="UTF-8">
@@ -14,9 +15,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Online Electrical Shopee</title>
-
-
-
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -44,10 +42,6 @@
 </head>
 
 <body>
-
-
-
-
 
 
 	<!-- Page Preloder -->
@@ -80,21 +74,15 @@
 	<!-- Breadcrumb Section End -->
 
 	<%
+	String ch =request.getParameter("ch");
 	CategoryDao categorydao = new CategoryDao();
 	List<Category> clist = categorydao.getCategoryList();
-	ProductDaoImp productdao = new ProductDaoImp();
+	ProductDao productdao = new ProductDaoImp();
 	
-	String cat = request.getParameter("category");
+	//String cat = request.getParameter("category");
 
-	List<Product> prodlist = null;
-
-	if (cat == null || cat.trim().equals("all")) {
-		prodlist = productdao.getAllProducts();
-	} else {
-
-		int id = Integer.parseInt(cat.trim());
-		prodlist = productdao.getAllProductsById(id);
-	}
+	List<Product> prodlist = productdao.getProductBySearch(ch);
+	
 	%>
 
 
@@ -197,12 +185,6 @@
 	<br>
 	<br>
 	<br>
-
-
-
-
-
-
 
 	<jsp:include page="footer.html" />
 
